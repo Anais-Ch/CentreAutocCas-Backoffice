@@ -16,24 +16,24 @@ import { UsersListComponent } from './Users/users-list/users-list.component';
 
 const routes: Routes = [
   //LOGIN path
-  {path:'/Login', component: LoginComponent},
+  {path:'login', component: LoginComponent},
   //HOMEPAGE path
   {path:'', component: DashboardComponent},
   //USERS related pages paths
-  {path:'/Users/Users-list', component : UsersListComponent},
-  {path:'/Users/users-administration', component : UsersAdministrationComponent},
-  {path:'/Users/user', component: UserComponent},
-  {path:'/Users/add-user', component: AddUserComponent},
+  {path:'users/users-list', component : UsersListComponent},
+  {path:'users/users-administration', component : UsersAdministrationComponent},
+  {path:'users/user', component: UserComponent},
+  {path:'users/add-user', component: AddUserComponent},
   //SEARCH RESULTS path  
-  {path:'/Queries/ads-search-results', component: ResultsAdsSearchComponent},
+  {path:'queries/ads-search-results', component: ResultsAdsSearchComponent},
   //GARAGES related pages paths
-  {path:'/Garages/garages-list', component: GaragesListComponent},
-  {path:'/Garages/garages-administration', component: GaragesAdministrationComponent},
-  {path:'/Garages/garage', component: GarageComponent},
+  {path:'garages/garages-list', component: GaragesListComponent},
+  {path:'garages/garages-administration', component: GaragesAdministrationComponent},
+  {path:'garages/garage', component: GarageComponent},
   //ADS related pages path  
-  {path:'/Ads/ad', component: AdComponent},
-  {path:'/Ads/ads-administartion', component: AdsAdministrationComponent},
-  {path:'/Ads/ads-list', component: AdsListComponent},
+  {path:'ads/ad', component: AdComponent},
+  {path:'ads/ads-administartion', component: AdsAdministrationComponent},
+  {path:'ads/ads-list', component: AdsListComponent},
 ];
 
 @NgModule({
