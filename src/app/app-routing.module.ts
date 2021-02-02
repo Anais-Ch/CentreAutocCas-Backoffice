@@ -15,22 +15,22 @@ import { UsersAdministrationComponent } from './Users/users-administration/users
 import { UsersListComponent } from './Users/users-list/users-list.component';
 
 const routes: Routes = [
-  //login path
+  //LOGIN path
   {path:'/Login', component: LoginComponent},
-  //homepage path
+  //HOMEPAGE path
   {path:'', component: DashboardComponent},
-  //User related pages paths
+  //USERS related pages paths
   {path:'/Users/Users-list', component : UsersListComponent},
   {path:'/Users/users-administration', component : UsersAdministrationComponent},
   {path:'/Users/user', component: UserComponent},
   {path:'/Users/add-user', component: AddUserComponent},
-  //search results path  
+  //SEARCH RESULTS path  
   {path:'/Queries/ads-search-results', component: ResultsAdsSearchComponent},
-  //Garages related pages paths
+  //GARAGES related pages paths
   {path:'/Garages/garages-list', component: GaragesListComponent},
   {path:'/Garages/garages-administration', component: GaragesAdministrationComponent},
   {path:'/Garages/garage', component: GarageComponent},
-  //Ads related pages path  
+  //ADS related pages path  
   {path:'/Ads/ad', component: AdComponent},
   {path:'/Ads/ads-administartion', component: AdsAdministrationComponent},
   {path:'/Ads/ads-list', component: AdsListComponent},
