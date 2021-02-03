@@ -24,7 +24,7 @@
                   <tbody>
                       <!--End Template row user-->
                       <!--Template row user-->
-                    <tr *ngFor='let user of users'>
+                    <tr *ngFor='let user of users'> <!--loop for users retrieved by the get request-->
                       <td class="pl-4">{{user.id}}</td>
                       <td>
                         <h5 class="font-medium mb-0">{{user.lastName}} </h5>
@@ -58,6 +58,25 @@
                     
                   </tbody>
                 </table>
+                <!--pagination-->
+                <nav aria-label="Page navigation example">
+                  <ul class="pagination">
+                    <!--PREVIOUS-->
+                    <!--displayed only if previousprevLink data exists-->
+                    <!--methode to load pages on click-->
+                    <li class="page-item" *ngIf="prevLink !== null"><a class="page-link" (click)="loadLastpage()">Previous</a></li><!--affcihe lien si valeur dans el link-->
+                    
+                    <!--<li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>-->
+                    
+                    <!--NEXT-->
+                    <!--displayed only if next prevLink data exists-->
+                    <!--methode to load pages on click-->
+                    <li class="page-item" *ngIf="nextLink !== null"><a class="page-link" (click)="loadNextPage()">Next</a></li><!--methond load on click-->
+                  </ul>
+                </nav>
+                <!-- end pagination-->
             </div>
         </div>
     </div>

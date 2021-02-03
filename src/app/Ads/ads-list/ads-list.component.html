@@ -1,1 +1,52 @@
-<p>ads-list works!</p>
+<div class="container">
+    <div>
+        <!--title-->
+        <h2>Liste des annonces</h2>
+    </div>
+    <!--gagrages list-->
+    <table class="table table-striped table-dark">
+        <thead>
+            <!--table header-->
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Propriétaire</th>
+            <th scope="col">Titre</th>
+            <th scope="col">Garage</th>
+            <th scope="col">Date</th>
+            <th scope="col">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+            <!--row template-->
+          <tr *ngFor="let ad of ads"><!--loop on garages-->
+            <th scope="row">{{ad.id}}</th>
+            <td>placeholder</td>
+            <td>{{ad.title}}</td>
+            <td>{{ad.garage}}</td>
+            <td>placeholder </td>
+            <td>placeholder</td>
+          </tr>
+          <!--fin row template-->
+        </tbody>
+      </table>
+      <!--pagination-->
+      <nav aria-label="Page navigation example">
+        <ul class="pagination">
+          <!--PREVIOUS-->
+          <!--displayed only if previousprevLink data exists-->
+          <!--methode to load pages on click-->
+          <li class="page-item" *ngIf="prevLink !== null"><a class="page-link" (click)="loadLastpage()">Previous</a></li><!--affcihe lien si valeur dans el link-->
+          
+          <!--<li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>-->
+          
+          <!--NEXT-->
+          <!--displayed only if next prevLink data exists-->
+          <!--methode to load pages on click-->
+          <li class="page-item" *ngIf="nextLink !== null"><a class="page-link" (click)="loadNextpage()">Next</a></li><!--methond load on click-->
+        </ul>
+      </nav>
+      <!-- end pagination-->
+
+</div>

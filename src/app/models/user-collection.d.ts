@@ -15,18 +15,9 @@ export interface UserCollection {
         '@id': string;
         '@type': string;
         'hydra:first': string;
-        'hydra:last': string;
-        'hydra:next': string;
+        'hydra:last'?: string;
+        'hydra:next'?: string;
+        'hydra:previous'?: string;
+
     };
-    /*"hydra:search": Array<{
-        '@type': string;
-        'hydra:template': string;
-        'hydra:variableRepresentation': string;
-        'hydra:mapping': Array<Array<{
-            '@type': string;
-            'variable': string;
-            'property'?: string;
-            required: boolean;
-        }>>
-    }>;*/
 }
