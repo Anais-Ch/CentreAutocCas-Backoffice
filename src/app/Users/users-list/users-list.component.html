@@ -23,24 +23,24 @@
                   </thead>
                   <tbody>
                       <!--End Template row user-->
-                      <!--Template row user 2-->
-                    <tr>
-                      <td class="pl-4">1</td>
+                      <!--Template row user-->
+                    <tr *ngFor='let user of users'>
+                      <td class="pl-4">{{user.id}}</td>
                       <td>
-                        <h5 class="font-medium mb-0">Daniel </h5>
-                        <span class="text-muted">Kristeen</span><br>
+                        <h5 class="font-medium mb-0">{{user.lastName}} </h5>
+                        <span class="text-muted">{{user.firstName}}</span><br>
                       </td>
                       <td>
-                        <span class="text-muted">daniel@website.com</span><br>
+                        <span class="text-muted">{{user.email}}</span><br>
                       </td>
                       <td>
                         <span class="text-muted">7 rue du port </span><br>
                         <span class="text-muted">63 000 Clermont-fd </span><br>
-                        <span class="text-muted">04 83 85 68 40</span><br>
+                        <span class="text-muted">{{user.phone}}</span><br>
                         <span class="text-muted">06 85 98 74 10</span><br>
                       </td>
                       <td>
-                        <span class="text-muted">12 21 354 87</span><br>
+                        <span class="text-muted">{{user.siret}}</span><br>
                       </td>
                       <td>
                         <select class="form-control category-select" id="exampleFormControlSelect1">
@@ -54,161 +54,7 @@
 
                       </td>
                     </tr>
-                         <tr>
-                      <td class="pl-4">1</td>
-                      <td>
-                        <h5 class="font-medium mb-0">Daniel </h5>
-                        <span class="text-muted">Kristeen</span><br>
-                      </td>
-                      <td>
-                        <span class="text-muted">daniel@website.com</span><br>
-                      </td>
-                      <td>
-                        <span class="text-muted">7 rue du port </span><br>
-                        <span class="text-muted">63 000 Clermont-fd </span><br>
-                        <span class="text-muted">04 83 85 68 40</span><br>
-                        <span class="text-muted">06 85 98 74 10</span><br>
-                      </td>
-                      <td>
-                        <span class="text-muted">12 21 354 87</span><br>
-                      </td>
-                      <td>
-                        <select class="form-control category-select" id="exampleFormControlSelect1">
-                          <option>Utilisateur</option>
-                          <option>Admin</option>
-                        </select>
-                      </td>
-                      <td>
-                        <button type="button" class="btn btn-danger ">Supprimer</button>
-                        <button type="button" class="btn btn-primary">Modifier</button>
-
-                      </td>
-                    </tr>
-
-                    <tr>
-                        <td class="pl-4">1</td>
-                        <td>
-                          <h5 class="font-medium mb-0">Daniel </h5>
-                          <span class="text-muted">Kristeen</span><br>
-                        </td>
-                        <td>
-                          <span class="text-muted">daniel@website.com</span><br>
-                        </td>
-                        <td>
-                          <span class="text-muted">7 rue du port </span><br>
-                          <span class="text-muted">63 000 Clermont-fd </span><br>
-                          <span class="text-muted">04 83 85 68 40</span><br>
-                          <span class="text-muted">06 85 98 74 10</span><br>
-                        </td>
-                        <td>
-                          <span class="text-muted">12 21 354 87</span><br>
-                        </td>
-                        <td>
-                          <select class="form-control category-select" id="exampleFormControlSelect1">
-                            <option>Utilisateur</option>
-                            <option>Admin</option>
-                          </select>
-                        </td>
-                        <td>
-                          <button type="button" class="btn btn-danger ">Supprimer</button>
-                          <button type="button" class="btn btn-primary">Modifier</button>
-  
-                        </td>
-                      </tr>
-                      <!--End Template row user 2-->
-                        <!--Template row user 3-->
-                        <tr>
-                            <td class="pl-4">1</td>
-                            <td>
-                            <h5 class="font-medium mb-0">Daniel </h5>
-                            <span class="text-muted">Kristeen</span><br>
-                            </td>
-                            <td>
-                            <span class="text-muted">daniel@website.com</span><br>
-                            </td>
-                            <td>
-                            <span class="text-muted">7 rue du port </span><br>
-                            <span class="text-muted">63 000 Clermont-fd </span><br>
-                            <span class="text-muted">04 83 85 68 40</span><br>
-                            <span class="text-muted">06 85 98 74 10</span><br>
-                            </td>
-                            <td>
-                            <span class="text-muted">12 21 354 87</span><br>
-                            </td>
-                            <td>
-                            <select class="form-control category-select" id="exampleFormControlSelect1">
-                                <option>Utilisateur</option>
-                                <option>Admin</option>
-                            </select>
-                            </td>
-                            <td>
-                            <button type="button" class="btn btn-danger ">Supprimer</button>
-                            <button type="button" class="btn btn-primary">Modifier</button>
-    
-                            </td>
-                        </tr>
-                            <tr>
-                            <td class="pl-4">1</td>
-                            <td>
-                            <h5 class="font-medium mb-0">Daniel </h5>
-                            <span class="text-muted">Kristeen</span><br>
-                            </td>
-                            <td>
-                            <span class="text-muted">daniel@website.com</span><br>
-                            </td>
-                            <td>
-                            <span class="text-muted">7 rue du port </span><br>
-                            <span class="text-muted">63 000 Clermont-fd </span><br>
-                            <span class="text-muted">04 83 85 68 40</span><br>
-                            <span class="text-muted">06 85 98 74 10</span><br>
-                            </td>
-                            <td>
-                            <span class="text-muted">12 21 354 87</span><br>
-                            </td>
-                            <td>
-                            <select class="form-control category-select" id="exampleFormControlSelect1">
-                                <option>Utilisateur</option>
-                                <option>Admin</option>
-                            </select>
-                            </td>
-                            <td>
-                            <button type="button" class="btn btn-danger ">Supprimer</button>
-                            <button type="button" class="btn btn-primary">Modifier</button>
-    
-                            </td>
-                        </tr>
-    
-                        <tr>
-                            <td class="pl-4">1</td>
-                            <td>
-                                <h5 class="font-medium mb-0">Daniel </h5>
-                                <span class="text-muted">Kristeen</span><br>
-                            </td>
-                            <td>
-                                <span class="text-muted">daniel@website.com</span><br>
-                            </td>
-                            <td>
-                                <span class="text-muted">7 rue du port </span><br>
-                                <span class="text-muted">63 000 Clermont-fd </span><br>
-                                <span class="text-muted">04 83 85 68 40</span><br>
-                                <span class="text-muted">06 85 98 74 10</span><br>
-                            </td>
-                            <td>
-                                <span class="text-muted">12 21 354 87</span><br>
-                            </td>
-                            <td>
-                                <select class="form-control category-select" id="exampleFormControlSelect1">
-                                <option>Utilisateur</option>
-                                <option>Admin</option>
-                                </select>
-                            </td>
-                            <td>
-                                <button type="button" class="btn btn-danger ">Supprimer</button>
-                                <button type="button" class="btn btn-primary">Modifier</button>
-        
-                            </td>
-                            </tr>
-                            <!--End Template row user 3-->
+                     
                     
                   </tbody>
                 </table>

@@ -20,6 +20,7 @@ import { StatsComponent } from './Dashboard/stats/stats.component';
 import { LastAdsComponent } from './Dashboard/last-ads/last-ads.component';
 import { LastUsersComponent } from './Dashboard/last-users/last-users.component';
 import { ResultsAdsSearchComponent } from './Queries/results-ads-search/results-ads-search.component';
+import {HttpClientModule} from '@angular/common/http'; //import Http Client for angukar app
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { ResultsAdsSearchComponent } from './Queries/results-ads-search/results-
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule, //import http client for angular app
   ],
   providers: [],
   bootstrap: [AppComponent]

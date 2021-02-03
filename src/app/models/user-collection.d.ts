@@ -18,7 +18,7 @@ export interface UserCollection {
         'hydra:last': string;
         'hydra:next': string;
     };
-    "hydra:search": Array<{
+    /*"hydra:search": Array<{
         '@type': string;
         'hydra:template': string;
         'hydra:variableRepresentation': string;
@@ -28,5 +28,5 @@ export interface UserCollection {
             'property'?: string;
             required: boolean;
         }>>
-    }>;
+    }>;*/
 }
