@@ -15,6 +15,8 @@ export class UsersListComponent implements OnInit {
   public prevLink: string|null = null; //met la valeur de balises à null
   public nextLink: string|null = null;//met la valeur des balise à null pour els cacher
   
+  public lastPage: number|null =null; //set last page valuie at null
+
   constructor(
     private httpClient: HttpClient, //bind httpclient to the component
   ) { }
@@ -48,6 +50,28 @@ export class UsersListComponent implements OnInit {
         else { //else prevlink var is set to data from hydra:previous and is displayed
           this.prevLink= data['hydra:view']['hydra:previous'];
         }
+        //BTN LAST PAGE conditions
+        if(data['hydra:view']['hydra:last'] === undefined){  // if no previous page
+          this.lastPage = null; //prevLink is set on null the btn disappear
+        
+        }
+        else { 
+          //'/api/users?pages=1'
+          const regex = /\.*page=([0-9]+)/;// définit le type de résultat attendu ?page=chiffreentre 1et 9
+          const str = data['hydra:view']['hydra:last'];
+
+          //an array
+          //first element  => the full regex
+          //secodn element => only the content inside first parentheses
+          const matches = str.match(regex); 
+          if (matches === null) {
+            this.lastPage = null;
+          }
+          else{
+            this.lastPage = parseInt(matches[1]);
+          }
+          
+        }
       });
     }
 
@@ -65,6 +89,25 @@ export class UsersListComponent implements OnInit {
         this.loadPage(this.prevLink); //methode loadPage for number set in prevLink
       }
     }
+    //dispaly all pages as btn
+    public get getPageNumbers(): Array<number>{ //tab that conatines pag 1 to last number og pages 
+      const arr: Array<number> = [];
+      if(this.lastPage !== null){
+        for (let i = 1;
+          i <= this.lastPage;
+          i++) {
+            arr.push(i);
+          }
+      }
+      return arr;  
+    }
+
+    // loadPageByNumber
+
+    public loadPageByNumber(pageNumber: number): void {
+      this.loadPage('/api/users?page=' + pageNumber);
+    }
+    
 
 
    

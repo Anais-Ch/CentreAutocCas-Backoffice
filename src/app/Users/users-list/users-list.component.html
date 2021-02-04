@@ -69,7 +69,11 @@
                     <!--<li class="page-item"><a class="page-link" href="#">1</a></li>
                     <li class="page-item"><a class="page-link" href="#">2</a></li>
                     <li class="page-item"><a class="page-link" href="#">3</a></li>-->
-                    
+                    <li *ngFor="let page of getPageNumbers" class="page-item" >
+                      <a class="page-link" (click) ="loadPageByNumber(page)">
+                        {{page}}
+                      </a>
+                    </li><!--methond load on click-->
                     <!--NEXT-->
                     <!--displayed only if next prevLink data exists-->
                     <!--methode to load pages on click-->
