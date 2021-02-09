@@ -1,0 +1,123 @@
+<!--form-->
+
+<form #userForm="ngForm" (ngSubmit)="submit()">
+
+    <!--title-->
+    <div class="form-group">
+      <label for="title">Ad title</label>
+      <input type="text"
+             class="form-control"
+             id="title"
+             aria-describedby="titleNameHelp"
+             [(ngModel)]="listing.title"
+             name="title"
+      >
+      <small id="titleNameHelp" class="form-text text-muted">Enter here the ad's title .</small>
+    </div>
+  <!--Descritpion-->
+    <div class="form-group">
+      <label for="description">description</label>
+      <input type="text"
+             class="form-control"
+             id="description"
+             aria-describedby="descriptionHelp"
+             [(ngModel)]="listing.description"
+             name="description"
+      >
+      <small id="descriptionNameHelp" class="form-text text-muted">Enter here the first name of the street for the.</small>
+    </div>
+
+    <!--release year-->
+    <div class="form-group">
+        <label for="release-year">Release Year</label>
+        <input type="text"
+               class="form-control"
+               id="realeaseYear"
+               aria-describedby="releaseYear"
+               [(ngModel)]="listing.releaseYear"
+               name="release-year"
+        >
+        <small id="releaseYearHelp" class="form-text text-muted">Enter the released year of the car.</small>
+      </div>
+      <!--KM-->
+    <div class="form-group">
+        <label for="km">Km</label>
+        <input type="text"
+               class="form-control"
+               id="km"
+               aria-describedby="kmHelp"
+               [(ngModel)]="listing.km"
+               name="km"
+        >
+        <small id="kmHelp" class="form-text text-muted">Enter here the kmof the car.</small>
+      </div>
+      <!--price-->
+    <div class="form-group">
+        <label for="price">Price</label>
+        <input type="text"
+               class="form-control"
+               id="price"
+               aria-describedby="priceHelp"
+               [(ngModel)]="listing.price"
+               name="price"
+        >
+        <small id="priceHelp" class="form-text text-muted">Enter here the car's price.</small>
+      </div>
+
+       <!--brand-->
+    <div class="form-group">
+        <label for="brand">Brand</label>
+        <input type="text"
+               class="form-control"
+               id="brand"
+               aria-describedby="brandHelp"
+               [(ngModel)]="listing.brand"
+               name="brand"
+        >
+        <small id="brandHelp" class="form-text text-muted">Enter here the car's brand.</small>
+      </div>
+
+         <!--Model-->
+    <div class="form-group">
+        <label for="model">Model</label>
+        <input type="text"
+               class="form-control"
+               id="model"
+               aria-describedby="modelHelp"
+               [(ngModel)]="listing.model"
+               name="model"
+        >
+        <small id="modelHelp" class="form-text text-muted">Enter here the car's model.</small>
+      </div>
+
+      <!--fuel-->
+    <div class="form-group">
+        <label for="fuel">Fuel</label>
+        <input type="text"
+               class="form-control"
+               id="fuel"
+               aria-describedby="fuelHelp"
+               [(ngModel)]="listing.fuel"
+               name="fuel"
+        >
+        <small id="fuelHelp" class="form-text text-muted">Enter here the car's fuel.</small>
+      </div>
+
+      <!--garage-->
+    <div class="form-group">
+        <label for="garage">Garage</label>
+        <input type="text"
+               class="form-control"
+               id="garage"
+               aria-describedby="garageHelp"
+               [(ngModel)]="listing.garage"
+               name="garage"
+        >
+        <small id="garageHelp" class="form-text text-muted">Enter here the car's garage name.</small>
+      </div>
+    <!--BTN SUBMIT-->
+  
+    <button type="submit" class="btn btn-success">Create the ad</button>
+  </form>
+
+<!-- END form-->

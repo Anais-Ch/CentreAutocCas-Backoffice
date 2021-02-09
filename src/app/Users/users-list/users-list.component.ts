@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { UserCollectionFilter } from 'src/app/forms/user-collection-filter.f';
 import { UserCollection } from 'src/app/models/user-collection';
 import { UserJsonld } from 'src/app/models/user-jsonld';
+
 
 @Component({
   selector: 'app-users-list',
@@ -12,10 +14,19 @@ export class UsersListComponent implements OnInit {
 
 
   public users: Array<UserJsonld> = []; //empty array to retrieve the data from our get request
+ 
   public prevLink: string|null = null; //met la valeur de balises à null
   public nextLink: string|null = null;//met la valeur des balise à null pour els cacher
   
   public lastPage: number|null =null; //set last page valuie at null
+
+  //filters USERS
+  public filters: UserCollectionFilter= { //objetc to fill when retriveing onfo for a filters
+    email: '', 
+    lastName:'',
+  }
+
+  
 
   constructor(
     private httpClient: HttpClient, //bind httpclient to the component
@@ -23,14 +34,34 @@ export class UsersListComponent implements OnInit {
 
   ngOnInit(): void {
     //retrieve page 1 from garages list on page loading
-    this.loadPage('/api/users?page=1');
+    this.loadPage('/api/users?page=1'); //added this.filterEmail to have allows queries on emails
     }
 
     //outside ngOnInit()
+
+    //APPLY FILTERS
+
+    public applyFilters(page: number = 1): void {//if no number then page = 1 put everyhting on page 1
+      let url = '/api/users?page=' + page;
+
+      // Object.keys(this.filters) => ['email', 'lastName', 'bsrasrui']
+      // Object.keys get an array of all attribute's name from a given object.
+      for (const key of Object.keys(this.filters)){ //filling filters with datat from page
+        // access an object's attribute with that array syntax 
+        if (key in this.filters) {
+          const val= this.filters[key as keyof UserCollectionFilter];
+
+          if(val !== '') {
+            url += '&' + key + '=' + val;
+          }
+        }
+      }
+      this.loadPage(url)
+    }
   
     //Loading page methode on private since it's only called in ts
     private loadPage(page:string): void{
-      //bind the get to the API URL (without garage or users etx specifiaction) + page for pagination
+      //bind the get to the API URL (without garage or users etc specifiaction) + page for pagination
       this.httpClient.get<UserCollection>('https:/hb-bc-dwwm-2020.deploy.this-serv.com' + page).subscribe((data)=>{
         this.users = data['hydra:member'];//fill the array garages with data from the API
 
@@ -50,9 +81,9 @@ export class UsersListComponent implements OnInit {
         else { //else prevlink var is set to data from hydra:previous and is displayed
           this.prevLink= data['hydra:view']['hydra:previous'];
         }
-        //BTN LAST PAGE conditions
-        if(data['hydra:view']['hydra:last'] === undefined){  // if no previous page
-          this.lastPage = null; //prevLink is set on null the btn disappear
+        //BTNS DISPLAY ALL PAGES
+        if(data['hydra:view']['hydra:last'] === undefined){  // if no pages (no datas)
+          this.lastPage = null; //LastPage is set on null no btn dispplay
         
         }
         else { 
@@ -64,6 +95,7 @@ export class UsersListComponent implements OnInit {
           //first element  => the full regex
           //secodn element => only the content inside first parentheses
           const matches = str.match(regex); 
+
           if (matches === null) {
             this.lastPage = null;
           }
@@ -89,7 +121,7 @@ export class UsersListComponent implements OnInit {
         this.loadPage(this.prevLink); //methode loadPage for number set in prevLink
       }
     }
-    //dispaly all pages as btn
+    //methode to get all pages
     public get getPageNumbers(): Array<number>{ //tab that conatines pag 1 to last number og pages 
       const arr: Array<number> = [];
       if(this.lastPage !== null){
@@ -105,7 +137,8 @@ export class UsersListComponent implements OnInit {
     // loadPageByNumber
 
     public loadPageByNumber(pageNumber: number): void {
-      this.loadPage('/api/users?page=' + pageNumber);
+      this.applyFilters(pageNumber);
+            //this.loadPage('/api/users?page=' + pageNumber);
     }
     
 

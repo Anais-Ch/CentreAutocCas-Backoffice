@@ -1,0 +1,60 @@
+<form *ngIf="user" #userForm="ngForm" (ngSubmit)="submit()">
+    <div class="form-group">
+      <label for="last-name">Last name</label>
+      <input type="text"
+             class="form-control"
+             id="last-name"
+             aria-describedby="lastNameHelp"
+             [(ngModel)]="user.lastName"
+             name="lastName"
+      >
+      <small id="lastNameHelp" class="form-text text-muted">Enter here the last name of the user.</small>
+      <!--display error message from API-->
+      <small *ngFor="let err of retrieveErrors('lastName')" class="form-text text-danger">{{err}}</small>
+    </div>
+  
+    <div class="form-group">
+      <label for="first-name">First name</label>
+      <input type="text"
+             class="form-control"
+             id="first-name"
+             aria-describedby="firstNameHelp"
+             [(ngModel)]="user.firstName"
+             name="firstName"
+      >
+      <small id="firstNameHelp" class="form-text text-muted">Enter here the first name of the user.</small>
+      <!--display error message from API-->
+      <small *ngFor="let err of retrieveErrors('firstName')" class="form-text text-danger">{{err}}</small>
+    </div>
+  
+    <div class="form-group">
+      <label for="email">E-mail</label>
+      <input type="email"
+             class="form-control"
+             id="email"
+             aria-describedby="emailHelp"
+             [(ngModel)]="user.email"
+             name="email"
+      >
+      <small id="emailHelp" class="form-text text-muted">Enter here the email of the user.</small>
+      <!--display error message from API-->
+      <small *ngFor="let err of retrieveErrors('email')" class="form-text text-danger">{{err}}</small>
+    </div>
+
+    <!--siret-->
+    <div class="form-group">
+      <label for="siret">Siret</label>
+      <input type="email"
+             class="form-control"
+             id="siret"
+             aria-describedby="siretHelp"
+             [(ngModel)]="user.siret"
+             name="siret"
+      >
+      <small id="siretHelp" class="form-text text-muted">Enter here the siret of the user.</small>
+      <!--display error message from API-->
+      <small *ngFor="let err of retrieveErrors('siret')" class="form-text text-danger">{{ err }}</small>
+    </div>
+  
+    <button type="submit" class="btn btn-success">Create the user</button>
+  </form>

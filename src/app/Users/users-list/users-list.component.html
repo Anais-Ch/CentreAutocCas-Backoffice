@@ -5,10 +5,15 @@
             <div class="card-body">
                 <h5 class="card-title mb-0">Liste utilisateurs</h5>
             </div>
+            <!--BTN ADD NEw USERS-->
             <div>
-                <button type="button" class="btn btn-success">Ajouter un Utilisateur</button>
+                <button type="button" class="btn btn-success" routerLink="/users/add-user">
+                  Ajouter un Utilisateur
+                </button>
             </div>
             <div class="table-responsive">
+              <!--form-->
+              <form #Filters="ngForm" (ngSubmit)="applyFilters()">  <!--On ne peut pas mettre de balise form dans une balise table start page 1-->
                 <table class="table no-wrap user-table mb-0">
                   <thead>
                     <tr>
@@ -20,6 +25,40 @@
                       <th scope="col" class="border-0 text-uppercase font-medium">Status</th>
                       <th scope="col" class="border-0 text-uppercase font-medium"></th>
                     </tr>
+
+                    <!-- secodn line in table heade-->
+                    <tr>
+                      <td>Identifiant</td>
+                      
+                      <td>
+                        <!-- LAst name search-->
+                        <div>
+                          <input type="text" class="form-control" [(ngModel)]="filters.lastName" name="lastName">
+                        </div>
+                        <!--end input-->
+                     </td>
+                      <td>
+                         <!-- Input for email search-->
+                        <div class="form-group">
+                          <input type="text" class="form-control" [(ngModel)]="filters.email" name="email"> 
+                        </div>
+                        <!--end input-->
+                      </td>
+                      <td>Contact</td>
+                      <td>SIRET</td>
+                      <td>Status</td>
+                      <td>
+                        <!--BTN SEARCH-->
+                        <div>
+                          <button type='submit' class="btn btn-success">
+                            Search
+                          </button>
+                          <!--End BTN-->
+                      </div>
+                    </td>
+                    </tr>
+                    <!--fin second line-->
+                  
                   </thead>
                   <tbody>
                       <!--End Template row user-->
@@ -50,7 +89,10 @@
                       </td>
                       <td>
                         <button type="button" class="btn btn-danger ">Supprimer</button>
-                        <button type="button" class="btn btn-primary">Modifier</button>
+                        <!--BTN send to the url of the edit page with the id-->
+                        <button type="button" class="btn btn-primary" [routerLink]="['users/users-administration/:id', user.id]">
+                          Modifier
+                        </button>
 
                       </td>
                     </tr>
@@ -58,13 +100,18 @@
                     
                   </tbody>
                 </table>
+              </form><!--fin form-->
                 <!--pagination-->
                 <nav aria-label="Page navigation example">
                   <ul class="pagination">
                     <!--PREVIOUS-->
                     <!--displayed only if previousprevLink data exists-->
                     <!--methode to load pages on click-->
-                    <li class="page-item" *ngIf="prevLink !== null"><a class="page-link" (click)="loadLastpage()">Previous</a></li><!--affcihe lien si valeur dans el link-->
+                    <li class="page-item" *ngIf="prevLink !== null"><!--affcihe lien si valeur dans el link-->
+                      <a class="page-link" (click)="loadLastpage()">
+                        Previous
+                      </a>
+                    </li>
                     
                     <!--<li class="page-item"><a class="page-link" href="#">1</a></li>
                     <li class="page-item"><a class="page-link" href="#">2</a></li>
@@ -73,11 +120,16 @@
                       <a class="page-link" (click) ="loadPageByNumber(page)">
                         {{page}}
                       </a>
-                    </li><!--methond load on click-->
+                    </li>
+                    <!--method load on click-->
                     <!--NEXT-->
                     <!--displayed only if next prevLink data exists-->
                     <!--methode to load pages on click-->
-                    <li class="page-item" *ngIf="nextLink !== null"><a class="page-link" (click)="loadNextPage()">Next</a></li><!--methond load on click-->
+                    <li  *ngIf="nextLink !== null" class="page-item">
+                      <a class="page-link" (click)="loadNextPage()"><!--method load on click-->
+                        Next
+                      </a>
+                    </li>
                   </ul>
                 </nav>
                 <!-- end pagination-->

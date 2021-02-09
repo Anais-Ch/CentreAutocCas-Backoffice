@@ -1,1 +1,10 @@
-<p>users-administration works!</p>
+src/app/users/edit-user/edit-user.component.html
+<!--BTN back to users list-->
+<div class="m-4">
+  <button type="button" class="btn btn-link" routerLink="/users/users-list">
+    Back to users list
+  </button>
+</div>
+
+<!--form-->
+<app-user-form [user]="user" [violationList]="violationList" (formSubmit)="submit($event)"></app-user-form>

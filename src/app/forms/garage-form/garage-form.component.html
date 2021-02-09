@@ -1,0 +1,83 @@
+<!--form-->
+
+<form #userForm="ngForm" (ngSubmit)="submit()">
+
+    <!--name-->
+    <div class="form-group">
+      <label for="name">Garage name</label>
+      <input type="text"
+             class="form-control"
+             id="name"
+             aria-describedby="garageNameHelp"
+             [(ngModel)]="garage.name"
+             name="name"
+      >
+      <small id="garageNameHelp" class="form-text text-muted">Enter here the garage's name .</small>
+    </div>
+  <!--Street-->
+    <div class="form-group">
+      <label for="street">Street</label>
+      <input type="text"
+             class="form-control"
+             id="street"
+             aria-describedby="streetHelp"
+             [(ngModel)]="garage.street"
+             name="street"
+      >
+      <small id="streetNameHelp" class="form-text text-muted">Enter here the first name of the street for the.</small>
+    </div>
+    <!--Street Complement-->
+    <div class="form-group">
+      <label for="street-complement">Street Complement</label>
+      <input type="text"
+             class="form-control"
+             id="streetComplement"
+             aria-describedby="streetComplementHelp"
+             [(ngModel)]="garage.streetComplement"
+             name="street-complement"
+      >
+      <small id="streetComplementHelp" class="form-text text-muted">Enter here the street complement for the garage adress.</small>
+    </div>
+
+    <!--postal code-->
+    <div class="form-group">
+        <label for="postal-code">Postal code</label>
+        <input type="text"
+               class="form-control"
+               id="postalCode"
+               aria-describedby="postalCodeHelp"
+               [(ngModel)]="garage.postalCode"
+               name="postal-code"
+        >
+        <small id="postalCodeHelp" class="form-text text-muted">Enter here the street postal code for the garage adress.</small>
+      </div>
+      <!--city-->
+    <div class="form-group">
+        <label for="city">City</label>
+        <input type="text"
+               class="form-control"
+               id="city"
+               aria-describedby="cityHelp"
+               [(ngModel)]="garage.city"
+               name="city"
+        >
+        <small id="cityHelp" class="form-text text-muted">Enter here the city for the garage adress.</small>
+      </div>
+      <!--Owner-->
+    <div class="form-group">
+        <label for="owner">Owner</label>
+        <input type="text"
+               class="form-control"
+               id="owner"
+               aria-describedby="ownerHelp"
+               [(ngModel)]="garage.owner"
+               name="owner"
+        >
+        <small id="owner" class="form-text text-muted">Enter here the owner of the garage.</small>
+      </div>
+    <!--BTN SUBMIT-->
+  
+    <button type="submit" class="btn btn-success">Create the user</button>
+  </form>
+
+<!-- END form-->

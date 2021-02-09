@@ -3,48 +3,109 @@
         <!--title-->
         <h2>Liste des garages</h2>
     </div>
-    <!--gagrages list-->
-    <table class="table table-striped table-dark">
-        <thead>
-            <!--table header-->
-          <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Propriétaire</th>
-            <th scope="col">Nom</th>
-            <th scope="col">Adresse</th>
-            <th scope="col">téléphone</th>
-            <th scope="col">SIREN</th>
-          </tr>
-        </thead>
-        <tbody>
-            <!--row template-->
-          <tr *ngFor="let garage of garages"><!--loop on garages-->
-            <th scope="row">{{garage.id}}</th>
-            <td>{{garage.owner}}</td>
-            <td>{{garage.name}}</td>
-            <td>{{garage.streetComplement}}</td>
-            <td>placeholder </td>
-            <td>placeholder</td>
-          </tr>
-          <!--fin row template-->
-        </tbody>
-      </table>
+    <!--BTN ADD GARAGE-->
+    <div class="m-4">
+      <button type="button" class="btn btn-success" routerLink="/garages/add-garage">
+        Add new garage
+      </button>
+    </div>
+    <!--END BTN-->
+    <!--form-->
+    <form #Filters="ngForm" (ngSubmit)="applyFilters()">
+      <!--gagrages list-->
+      <table class="table table-striped table-dark">
+          <thead>
+              <!--table header-->
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Propriétaire</th>
+              <th scope="col">Nom</th>
+              <th scope="col">Adresse</th>
+              <th scope="col">téléphone</th>
+              <th scope="col">SIREN</th>
+              <th>Recherche</th>
+            </tr>
+            <!--SEARCH ROW-->
+            <tr>
+              <th scope="col">
+                ID
+              </th>
+              <th scope="col">
+                <input type="text" class="form-control" [(ngModel)]="filterOwner" name="owner">
+              </th>
+              <th scope="col">
+                <input type="text" class="form-control" [(ngModel)]="filterName" name="name">
+              </th>
+              <th scope="col">
+                Adresse
+              </th>
+              <th scope="col">
+                téléphone
+              </th>
+              <th scope="col">
+                SIREN
+              </th>
+              <th>
+                <!--BTN SEARCH-->
+                <div>
+                  <button type='submit' class="btn btn-success">
+                    Search
+                  </button>
+                </div>
+                 <!--End BTN-->
+              </th>
+            </tr>
+            <!--END SEARCH ROW-->
+          </thead>
+          <tbody>
+              <!--row template-->
+            <tr *ngFor="let garage of garages"><!--loop on garages-->
+              <th scope="row">{{garage.id}}</th>
+              <td>{{garage.owner}}</td>
+              <td>{{garage.name}}</td>
+              <td>{{garage.streetComplement}}</td>
+              <td>placeholder </td>
+              <td>placeholder</td>
+            </tr>
+            <!--End row template-->
+          </tbody>
+        </table>
+        <!--End table-->
+      </form>
+      <!--fin form-->
       <!--pagination-->
       <nav aria-label="Page navigation example">
         <ul class="pagination">
           <!--PREVIOUS-->
           <!--displayed only if previousprevLink data exists-->
           <!--methode to load pages on click-->
-          <li class="page-item" *ngIf="prevLink !== null"><a class="page-link" (click)="loadLastpage()">Previous</a></li><!--affcihe lien si valeur dans el link-->
+          <li class="page-item" *ngIf="prevLink !== null">
+            <a class="page-link" (click)="loadLastpage()">
+              Previous
+            </a>
+          </li><!--affcihe lien si valeur dans el link-->
           
           <!--<li class="page-item"><a class="page-link" href="#">1</a></li>
           <li class="page-item"><a class="page-link" href="#">2</a></li>
           <li class="page-item"><a class="page-link" href="#">3</a></li>-->
           
+          <!--ALL PAGES-->
+          <!--displayed btns for all avaialable-->
+          <!--methode to load pages on click-->
+          <li *ngFor="let page of getPageNumbers" class="page-item" >
+            <a class="page-link" (click)="loadPagebyNumber(page)">
+              {{page}}
+            </a>
+          </li><!--methond load on click-->
+          
           <!--NEXT-->
           <!--displayed only if next prevLink data exists-->
           <!--methode to load pages on click-->
-          <li class="page-item" *ngIf="nextLink !== null"><a class="page-link" (click)="loadNextpage()">Next</a></li><!--methond load on click-->
+          <li class="page-item" *ngIf="nextLink !== null">
+            <a class="page-link" (click)="loadNextpage()">
+              Next
+            </a>
+          </li><!--methond load on click-->
         </ul>
       </nav>
       <!-- end pagination-->

@@ -1,1 +1,10 @@
-<p>add-user works!</p>
+<!--btn back to user list-->
+<div class="m-4">
+    <button type="button" class="btn btn-link" routerLink='/users/users-list'>
+        Back to users list
+    </button>
+</div>
+<!--end  btn back to user list-->
+<!--Form-->
+<app-user-form [user]="user" [violationList]="violationList" (formSubmit)="submit($event)"></app-user-form>
+
