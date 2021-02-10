@@ -1,6 +1,7 @@
 
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ConstraintViolationList } from 'src/app/models/constraint-violation-list';
+import { UserJsonld } from 'src/app/models/user-jsonld';
 
 
 import { User } from 'src/app/models/users';
@@ -16,6 +17,7 @@ import { User } from 'src/app/models/users';
 })
 export class UserFormComponent implements OnInit {
 
+   
 
   @Input()
   public user: User|null= null; //variable for ngIf on form
@@ -37,7 +39,7 @@ export class UserFormComponent implements OnInit {
       } 
     }
 
-    return arr; //and print it in html
+    return arr; // and print it in html
   }
 
   constructor() { }
@@ -51,8 +53,6 @@ export class UserFormComponent implements OnInit {
     if (this.user !== null) {
       this.formSubmit.emit(this.user);
     }
-    
-
   }
 
 }

@@ -1,60 +1,123 @@
-<form *ngIf="user" #userForm="ngForm" (ngSubmit)="submit()">
-    <div class="form-group">
-      <label for="last-name">Last name</label>
-      <input type="text"
-             class="form-control"
-             id="last-name"
-             aria-describedby="lastNameHelp"
-             [(ngModel)]="user.lastName"
-             name="lastName"
-      >
-      <small id="lastNameHelp" class="form-text text-muted">Enter here the last name of the user.</small>
-      <!--display error message from API-->
-      <small *ngFor="let err of retrieveErrors('lastName')" class="form-text text-danger">{{err}}</small>
-    </div>
-  
-    <div class="form-group">
-      <label for="first-name">First name</label>
-      <input type="text"
-             class="form-control"
-             id="first-name"
-             aria-describedby="firstNameHelp"
-             [(ngModel)]="user.firstName"
-             name="firstName"
-      >
-      <small id="firstNameHelp" class="form-text text-muted">Enter here the first name of the user.</small>
-      <!--display error message from API-->
-      <small *ngFor="let err of retrieveErrors('firstName')" class="form-text text-danger">{{err}}</small>
-    </div>
-  
-    <div class="form-group">
-      <label for="email">E-mail</label>
-      <input type="email"
-             class="form-control"
-             id="email"
-             aria-describedby="emailHelp"
-             [(ngModel)]="user.email"
-             name="email"
-      >
-      <small id="emailHelp" class="form-text text-muted">Enter here the email of the user.</small>
-      <!--display error message from API-->
-      <small *ngFor="let err of retrieveErrors('email')" class="form-text text-danger">{{err}}</small>
-    </div>
+<div class='container'>
 
-    <!--siret-->
-    <div class="form-group">
-      <label for="siret">Siret</label>
-      <input type="email"
-             class="form-control"
-             id="siret"
-             aria-describedby="siretHelp"
-             [(ngModel)]="user.siret"
-             name="siret"
-      >
-      <small id="siretHelp" class="form-text text-muted">Enter here the siret of the user.</small>
-      <!--display error message from API-->
-      <small *ngFor="let err of retrieveErrors('siret')" class="form-text text-danger">{{ err }}</small>
-    </div>
-  
-    <button type="submit" class="btn btn-success">Create the user</button>
-  </form>
+  <!--Form START-->
+  <form *ngIf="user" #userForm="ngForm" (ngSubmit)="submit()">
+
+      <!--input LAST NAME-->
+      <div class="form-group">
+        <label for="last-name">Last name</label>
+        <input type="text"
+              class="form-control"
+              id="last-name"
+              aria-describedby="lastNameHelp"
+              [(ngModel)]="user.lastName"
+              name="lastName"
+        >
+        <small id="lastNameHelp" class="form-text text-muted">Enter here the last name of the user.</small>
+        <!--display error message from API-->
+        <small *ngFor="let err of retrieveErrors('lastName')" class="form-text text-danger">{{err}}</small>
+      </div>
+      <!--input LAST NAME end-->
+
+      <!--input FIRST NAME-->
+      <div class="form-group">
+        <label for="first-name">First name</label>
+        <input type="text"
+              class="form-control"
+              id="first-name"
+              aria-describedby="firstNameHelp"
+              [(ngModel)]="user.firstName"
+              name="firstName"
+        >
+        <small id="firstNameHelp" class="form-text text-muted">Enter here the first name of the user.</small>
+        <!--display error message from API-->
+        <small *ngFor="let err of retrieveErrors('firstName')" class="form-text text-danger">{{err}}</small>
+      </div>
+      <!--input FIRST NAME end-->
+
+      <!--input PHONE -->
+      <div class="form-group">
+        <label for="phone1">Phone</label>
+        <input type="string"
+              class="form-control"
+              id="phone1"
+              aria-describedby="phone1Help"
+              [(ngModel)]="user.phone"
+              name="phone1"
+        >
+        <small id="phone1Help" class="form-text text-muted">Enter here the phone number of the user.</small>
+        <!--display error message from API-->
+        <small *ngFor="let err of retrieveErrors('phone')" class="form-text text-danger">{{err}}</small>
+      </div>
+      <!--input PHONE end-->
+      
+      <!--input EMAIL-->
+      <div class="form-group">
+        <label for="email">E-mail</label>
+        <input type="email"
+              class="form-control"
+              id="email"
+              aria-describedby="emailHelp"
+              [(ngModel)]="user.email"
+              name="email"
+        >
+        <small id="emailHelp" class="form-text text-muted">Enter here the email of the user.</small>
+        <!--display error message from API-->
+        <small *ngFor="let err of retrieveErrors('email')" class="form-text text-danger">{{err}}</small>
+      </div>
+      <!--input EMAIL end-->
+
+      <!--input SIRET-->
+      <div class="form-group">
+        <label for="siret">Siret</label>
+        <input type="email"
+              class="form-control"
+              id="siret"
+              aria-describedby="siretHelp"
+              [(ngModel)]="user.siret"
+              name="siret"
+        >
+        <small id="siretHelp" class="form-text text-muted">Enter here the siret of the user.</small>
+        <!--display error message from API-->
+        <small *ngFor="let err of retrieveErrors('siret')" class="form-text text-danger">{{ err }}</small>
+      </div>
+      <!--input SIRET end-->
+
+      <!--input GARAGES LIST -->
+      <div  class="form-group">
+
+        <label for="garagesList" class="mb-2">Garages List</label>
+        <small id="garagesListHelp" class="form-text text-muted row-col mb-2 ml-3">User's garages list</small>
+
+        <div *ngFor="let garage of user.garages; let itemGarages = index" class='row d-flex justify-content-around m-2'>
+           <!--use [ngModelOptions]="{standalone: true}" so all agrages are displayed -->
+          <input *ngIf="user.garages !== undefined "
+                type="string"
+                class="form-control col-md-9"
+                id="garagesList"
+                aria-describedby="garagesListHelp"
+                [(ngModel)]="user.garages[itemGarages]"
+                [ngModelOptions]="{standalone: true}"
+                disabled 
+          >
+          
+          <div col-md>
+            <button type="submit" class="btn btn-outline-danger" >Delete garage</button>
+            <button type="submit" class="btn btn-outline-primary ml-3">Edit garage</button>
+          </div>
+        
+        </div>
+        
+        <!--display error message from API-->
+        <small *ngFor="let err of retrieveErrors('garages')" class="form-text text-danger">{{err}}</small>
+
+        <button type="submit" class="btn btn-outline-success  ml-3">New garage</button>
+
+      </div>
+      <!--input GARAGES end-->
+    
+      <!--BTN create-->
+      <button type="submit" class="btn btn-success">Create the user</button>
+    </form>
+    <!--Form END-->
+</div>

@@ -1,6 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { UserCollectionFilter } from 'src/app/forms/user-collection-filter.f';
+import { ConstraintViolationList } from 'src/app/models/constraint-violation-list';
 import { UserCollection } from 'src/app/models/user-collection';
 import { UserJsonld } from 'src/app/models/user-jsonld';
 
@@ -20,8 +21,10 @@ export class UsersListComponent implements OnInit {
   
   public lastPage: number|null =null; //set last page valuie at null
 
+  public violationList: ConstraintViolationList|null = null; //declare violationList var for Input correspondance
+
   //filters USERS
-  public filters: UserCollectionFilter= { //objetc to fill when retriveing onfo for a filters
+  public filters: UserCollectionFilter= { //object to fill when retriveing onfo for a filters
     email: '', 
     lastName:'',
   }
@@ -142,6 +145,31 @@ export class UsersListComponent implements OnInit {
     }
     
 
+    public deletion: boolean = false;
+    //Method DeleteUSer
+    //retrieve userid in html call of the function
+    public deleteUser(id: number): void {
+      this.httpClient.delete('https://hb-bc-dwwm-2020.deploy.this-serv.com/api/users/'+ id).subscribe({
+        next : () => {
+          alert('User deleted');
+          this.deletion = true; // set to true for deletionc omplete message
+          this.loadPage('/api/users?page=1');// reload list
+        },
+        error : (err: HttpErrorResponse) => { //error message
+          if (err.status === 404) {
+            this.violationList = err.error; //retrieve error form api message
+            alert (err.error['hydra:description']); 
+           
+          }
+          else { // inform iuser that an error has occured (need to dispaly a better message (error unexpected))
+            alert(err.status + '- An error as occured.');
+          }
+        },
+      });
+      
+      
+
+    }
 
    
 }

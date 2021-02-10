@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AdComponent } from './Ads/ad/ad.component';
-import { AddAdComponent } from './ads/add-ad/add-ad.component';
+import { AddAdComponent } from './Ads/add-ad/add-ad.component';
 import { AdsAdministrationComponent } from './Ads/ads-administration/ads-administration.component';
 import { AdsListComponent } from './Ads/ads-list/ads-list.component';
 import { DashboardComponent } from './Dashboard/dashboard/dashboard.component';
-import { AddGarageComponent } from './garages/add-garage/add-garage.component';
+import { AddGarageComponent } from './Garages/add-garage/add-garage.component';
+
 import { GarageComponent } from './Garages/garage/garage.component';
 import { GaragesAdministrationComponent } from './Garages/garages-administration/garages-administration.component';
 import { GaragesListComponent } from './Garages/garages-list/garages-list.component';

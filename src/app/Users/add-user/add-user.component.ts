@@ -25,34 +25,31 @@ export class AddUserComponent implements OnInit {
     phone: undefined,
     siret: undefined,
     garages: [],
-  }
+  };
 
   public violationList: ConstraintViolationList|null = null; //declare violationList var for Input correspondance
 
   ngOnInit(): void {
   }
 
-  public submit(user:User){ //methode POST we use user:User argument to be able to adduser id later and specify to modify the users data
-    this.httpClient.post<UserJsonld>('https://hb-bc-dwwm-2020.deploy.this-serv.com/api/users', user).subscribe((user) => {
+  public submit(user:User): void{ //methode POST we use user:User argument to be able to adduser id later and specify to modify the users data
+    this.httpClient.post<UserJsonld>('https://hb-bc-dwwm-2020.deploy.this-serv.com/api/users', user).subscribe({
       //use Html message(<div>) and ngIf to inform the user creation (to do)
       next: (createdUser) => { //function for OK results
         //alert('User' + createdUser[@id] + 'created.');
         //Redirect list /details after user creation 
         this.router.navigate(['/users/users-list']);
-      }
-      //redirect list/details
+      },
+      
       error : (err: HttpErrorResponse) => { //error message
         if (err.status === 422) {
           this.violationList = err.error; //retrieve error form api message
           //alert (violationList ['hydra:description']); // obosolete// print api message
         }
         else { // inform iuser that an error has occured (need to dispaly a better message (error unexpected))
-        alert(err.status + '- An error as occured.');
-      }
-      }
-      
-
-      
+          alert(err.status + '- An error as occured.');
+        }
+      },
     });
   }
 

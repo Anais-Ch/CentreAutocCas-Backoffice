@@ -1,4 +1,5 @@
 <div class="container">
+  
 <div class="row">
     <div class="col-md-12">
         <div class="card">
@@ -11,6 +12,11 @@
                   Ajouter un Utilisateur
                 </button>
             </div>
+            <!--Success message-->
+            <div *ngIf="deletion == true" class="alert alert-success text-center" role="alert" >
+                The User has been deleted successfully!
+            </div>
+            <!-- END Success message-->
             <div class="table-responsive">
               <!--form-->
               <form #Filters="ngForm" (ngSubmit)="applyFilters()">  <!--On ne peut pas mettre de balise form dans une balise table start page 1-->
@@ -88,13 +94,15 @@
                         </select>
                       </td>
                       <td>
-                        <button type="button" class="btn btn-danger ">Supprimer</button>
+                        <!--BTN Delete using Delet user function with user.id as argument-->
+                        <button type="button" class="btn btn-danger" (click)="deleteUser(user.id)">Supprimer</button>
                         <!--BTN send to the url of the edit page with the id-->
-                        <button type="button" class="btn btn-primary" [routerLink]="['users/users-administration/:id', user.id]">
+                        <button type="button" class="btn btn-primary" [routerLink]="['/users/users-administration', user.id]">
                           Modifier
                         </button>
 
                       </td>
+                      
                     </tr>
                      
                     
