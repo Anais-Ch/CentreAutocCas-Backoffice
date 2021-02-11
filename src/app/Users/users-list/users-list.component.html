@@ -12,10 +12,7 @@
                   Ajouter un Utilisateur
                 </button>
             </div>
-            <!--Success message-->
-            <div *ngIf="deletion == true" class="alert alert-success text-center" role="alert" >
-                The User has been deleted successfully!
-            </div>
+           
             <!-- END Success message-->
             <div class="table-responsive">
               <!--form-->
@@ -94,12 +91,53 @@
                         </select>
                       </td>
                       <td>
-                        <!--BTN Delete using Delet user function with user.id as argument-->
-                        <button type="button" class="btn btn-danger" (click)="deleteUser(user.id)">Supprimer</button>
+                        <!--BTN Delete using Delet user function with user.id as argument open modal-->
+                        <button type="button" class="btn btn-danger" (click)="open(checkDelete)">Supprimer</button>
                         <!--BTN send to the url of the edit page with the id-->
                         <button type="button" class="btn btn-primary" [routerLink]="['/users/users-administration', user.id]">
                           Modifier
                         </button>
+                        <!--START POP UP-->
+                          <ng-template #checkDelete let-modal>
+
+                            <div class="modal-header">
+
+                              <h4 class="modal-title" id="modal-basic-title">Suppression</h4>
+
+                              
+
+                            </div>
+
+                            <div class="modal-body">
+
+                              <p class="font-weight-bold">
+                                Vous êtes sur le point de supprimer le compte de <span class="text-danger">{{this.user.firstName}}  {{this.user.lastName}}.</span>
+                              </p>
+                              <p>
+                                Ceci entrainera la suppression de toutes les données liées au compte (utilisateur, garages et annonces).
+                              </p>
+                              <p>
+                                Etes vous sur de vouloir continuer? 
+                              </p>
+                              <br>
+                              <p class="text-danger font-weight-bold">
+                                Cette action est irréversible
+                              </p>
+                              
+                            </div>
+
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                                Cancel
+                              </button>
+
+                              <button type="button" class="btn btn-danger" (click)="deleteUser(user.id); open(confirmDelete);modal.dismiss('Save Click')">Ok</button>
+
+                            </div>
+
+                          </ng-template>
+
+                          <!--fin POP UP-->
 
                       </td>
                       
@@ -146,3 +184,35 @@
     </div>
 </div>
 </div>
+
+ <!--START POP UP CONFIRM DELETE-->
+ <ng-template #confirmDelete let-modal>
+
+  <div class="modal-header">
+
+    <h4 class="modal-title" id="modal-basic-title">Suppression</h4>
+
+    
+
+  </div>
+
+  <div class="modal-body">
+    <p>
+      Le compte utilisateur à bien été supprimé
+    </p>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      Close
+    </button>
+
+    
+
+  </div>
+
+</ng-template>
+
+<!--fin POP UP-->
+
+

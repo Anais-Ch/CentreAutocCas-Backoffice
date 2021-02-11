@@ -1,9 +1,11 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Type} from '@angular/core';
 import { UserCollectionFilter } from 'src/app/forms/user-collection-filter.f';
 import { ConstraintViolationList } from 'src/app/models/constraint-violation-list';
 import { UserCollection } from 'src/app/models/user-collection';
 import { UserJsonld } from 'src/app/models/user-jsonld';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap'; //Modal
+
 
 
 @Component({
@@ -12,7 +14,7 @@ import { UserJsonld } from 'src/app/models/user-jsonld';
   styleUrls: ['./users-list.component.scss']
 })
 export class UsersListComponent implements OnInit {
-
+  closeResult: string | undefined; //modal
 
   public users: Array<UserJsonld> = []; //empty array to retrieve the data from our get request
  
@@ -32,7 +34,9 @@ export class UsersListComponent implements OnInit {
   
 
   constructor(
-    private httpClient: HttpClient, //bind httpclient to the component
+    private httpClient: HttpClient, //bind httpclient to the component*
+    private modalService: NgbModal, //for pop up 
+    
   ) { }
 
   ngOnInit(): void {
@@ -145,14 +149,11 @@ export class UsersListComponent implements OnInit {
     }
     
 
-    public deletion: boolean = false;
     //Method DeleteUSer
     //retrieve userid in html call of the function
     public deleteUser(id: number): void {
       this.httpClient.delete('https://hb-bc-dwwm-2020.deploy.this-serv.com/api/users/'+ id).subscribe({
         next : () => {
-          alert('User deleted');
-          this.deletion = true; // set to true for deletionc omplete message
           this.loadPage('/api/users?page=1');// reload list
         },
         error : (err: HttpErrorResponse) => { //error message
@@ -171,5 +172,42 @@ export class UsersListComponent implements OnInit {
 
     }
 
+    /////// FUNCTION FOR MODAL
+    open(content: any) {
+
+      this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+  
+        this.closeResult = `Closed with: ${result}`;
+  
+      }, (reason) => {
+  
+        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+  
+      });
+  
+    }
+  
+    
+  
+    private getDismissReason(reason: any): string {
+  
+      if (reason === ModalDismissReasons.ESC) {
+  
+        return 'by pressing ESC';
+  
+      } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+  
+        return 'by clicking on a backdrop';
+  
+      } else {
+  
+        return  `with: ${reason}`;
+  
+      }
+  
+    }
    
+
+
+
 }
