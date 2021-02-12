@@ -53,10 +53,10 @@
             <span class="col-2">
                 {{this.currentUser.garages[i]}}
             </span>
-            <button class="btn btn-outline-secondary btn-sm ml-3 'col md-2'">
+            <button class="btn btn-outline-secondary btn-sm ml-3">
                 Edit
             </button>
-            <button class="btn btn-outline-danger btn-sm ml-3 'col md-2'">
+            <button class="btn btn-outline-danger btn-sm ml-3">
                 Delete
             </button>
         </div> 
@@ -67,13 +67,89 @@
 
       
         <!--BTN EDIT-->
-        <button type="submit" class="btn btn-primary mt-5">
+        <button type="submit" class="btn btn-primary mt-5" [routerLink]="['/users/users-administration', currentUser.id]">
             Modifier User
         </button>
+        <!--END BTN EDIT-->
 
-        <button type="submit" class="btn btn-danger mt-5 ml-5">
+        <!-- BTN DELETE-->
+        <button type="submit" class="btn btn-danger mt-5 ml-5" (click)="open(checkDelete)">
            Delete User
         </button>
 
-      <!--END BTN EDIT-->
+      <!--END BTN DELETE-->
   </div>
+
+
+  <!-- POP UP 1-->
+
+  <!--START POP UP CHECK DELETE-->
+  <ng-template #checkDelete let-modal>
+
+    <div class="modal-header">
+
+      <h4 class="modal-title" id="modal-basic-title">Suppression</h4>
+
+    </div>
+
+    <div class="modal-body">
+
+      <p class="font-weight-bold">
+        Vous êtes sur le point de supprimer le compte de <span class="text-danger">{{this.currentUser.firstName}}  {{this.currentUser.lastName}}.</span>
+      </p>
+      <p>
+        Ceci entrainera la suppression de toutes les données liées au compte (utilisateur, garages et annonces).
+      </p>
+      <p>
+        Etes vous sur de vouloir continuer? 
+      </p>
+      <br>
+      <p class="text-danger font-weight-bold">
+        Cette action est irréversible
+      </p>
+      
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        Cancel
+      </button>
+
+      <button type="button" class="btn btn-danger" (click)="deleteUser(currentUser.id); open(confirmDelete);modal.dismiss('Save Click')">Ok</button>
+
+    </div>
+
+  </ng-template>
+
+  <!--fin POP UP CHECK DELETE -->
+
+  <!--START POP UP CONFIRM DELETE-->
+ <ng-template #confirmDelete let-modal>
+
+    <div class="modal-header">
+  
+      <h4 class="modal-title" id="modal-basic-title">Suppression</h4>
+  
+      
+  
+    </div>
+  
+    <div class="modal-body">
+      <p>
+        Le compte utilisateur à bien été supprimé
+      </p>
+    </div>
+  
+    <div class="modal-footer">
+      <button type="button" class="btn btn-success" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        Close
+      </button>
+  
+      
+  
+    </div>
+  
+  </ng-template>
+  
+  <!--fin POP UP-->
+  
