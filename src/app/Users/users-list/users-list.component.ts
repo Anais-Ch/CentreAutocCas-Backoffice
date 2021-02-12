@@ -5,6 +5,7 @@ import { ConstraintViolationList } from 'src/app/models/constraint-violation-lis
 import { UserCollection } from 'src/app/models/user-collection';
 import { UserJsonld } from 'src/app/models/user-jsonld';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap'; //Modal
+import { Router } from '@angular/router';
 
 
 
@@ -15,6 +16,7 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap'; //Moda
 })
 export class UsersListComponent implements OnInit {
   closeResult: string | undefined; //modal
+  public listUser: number = 0; //var to get hydra:totalItems
 
   public users: Array<UserJsonld> = []; //empty array to retrieve the data from our get request
  
@@ -36,15 +38,31 @@ export class UsersListComponent implements OnInit {
   constructor(
     private httpClient: HttpClient, //bind httpclient to the component*
     private modalService: NgbModal, //for pop up 
+    private router: Router, //allow redirction fo page
     
   ) { }
 
   ngOnInit(): void {
     //retrieve page 1 from garages list on page loading
     this.loadPage('/api/users?page=1'); //added this.filterEmail to have allows queries on emails
+    
+  
     }
 
     //outside ngOnInit()
+    
+    
+    ///Methode ot retribve number of users from ['hydra:totalItems']
+    
+    public countUser():number {
+      this.httpClient.get<UserCollection>('https:/hb-bc-dwwm-2020.deploy.this-serv.com/api/users').subscribe((data)=>{
+      this.listUser = data['hydra:totalItems'];
+      });
+      return this.listUser;
+    }
+      
+    
+    
 
     //APPLY FILTERS
 
@@ -100,7 +118,7 @@ export class UsersListComponent implements OnInit {
 
           //an array
           //first element  => the full regex
-          //secodn element => only the content inside first parentheses
+          //second element => only the content inside first parentheses
           const matches = str.match(regex); 
 
           if (matches === null) {
@@ -145,16 +163,18 @@ export class UsersListComponent implements OnInit {
 
     public loadPageByNumber(pageNumber: number): void {
       this.applyFilters(pageNumber);
-            //this.loadPage('/api/users?page=' + pageNumber);
+            
     }
     
 
     //Method DeleteUSer
-    //retrieve userid in html call of the function
+    //retrieve user id in html call of the function
     public deleteUser(id: number): void {
       this.httpClient.delete('https://hb-bc-dwwm-2020.deploy.this-serv.com/api/users/'+ id).subscribe({
         next : () => {
+
           this.loadPage('/api/users?page=1');// reload list
+          this.countUser();// refresh count users
         },
         error : (err: HttpErrorResponse) => { //error message
           if (err.status === 404) {
@@ -167,10 +187,11 @@ export class UsersListComponent implements OnInit {
           }
         },
       });
-      
-      
-
     }
+    
+    //var to get nb users 
+    public nbUser:number = this.countUser();
+     
 
     /////// FUNCTION FOR MODAL
     open(content: any) {

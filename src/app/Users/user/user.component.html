@@ -1,1 +1,79 @@
-<p>user works!</p>
+<!--btn back to user list-->
+<div class="m-4">
+    <button type="button" class="btn btn-link" routerLink='/users/users-list'>
+        Back to users list
+    </button>
+</div>
+<!--end  btn back to user list-->
+
+<div class="container">
+    <!--titre-->
+    <div class="text-center">
+        <h1 class="display-7">
+            {{currentUser.firstName}} {{currentUser.lastName}}
+        </h1> 
+    </div>
+    <!--fin titre-->
+    <!--ID-->
+    <div class="d-flex flex-row">
+        <h5 class="text-primary">ID</h5> <span class="ml-3 mr-3">{{currentUser.id}}</span>
+    </div>
+    <!-- fin ID-->
+    <!--Last Name-->
+    <div class="d-flex flex-row">
+         <h5 class="text-primary">Nom</h5> <span class="ml-3 mr-3">{{currentUser.lastName}}</span>
+    </div>
+    <!-- fin LastName-->
+    <!--First Name-->
+    <div class="d-flex flex-row">
+         <h5 class="text-primary">Prénom</h5> <span class="ml-3 mr-3">{{currentUser.firstName}}</span> 
+    </div>
+    <!-- fin FirstName-->
+    <!--email-->
+    <div class="d-flex flex-row">
+        <h5 class="text-primary">Email</h5> <span class="ml-3 mr-3">{{currentUser.email}}</span>
+    </div>
+    <!-- fin email-->
+    <!--Phone-->
+    <div class="d-flex flex-row">
+        <h5 class="text-primary">Phone</h5> <span class="ml-3 mr-3">{{currentUser.phone}}</span>
+    </div>
+    <!-- fin Phone-->
+    <!--SIRET-->
+    <div class="d-flex flex-row">
+         <h5 class="text-primary">SIRET</h5> <span class="ml-3 mr-3" *ngIf="currentUser.siret !== null " >{{currentUser.siret}}</span> 
+    </div>
+    <!-- fin SIRET-->
+    <!--Garages-->
+    <div >
+        <div >
+            <h5 class="text-primary">Garages</h5>
+        </div>
+        <div *ngFor="let garage of this.currentUser.garages; let i=index"  class="m-2 row d. flex justify-content-start">
+            <span class="col-2">
+                {{this.currentUser.garages[i]}}
+            </span>
+            <button class="btn btn-outline-secondary btn-sm ml-3 'col md-2'">
+                Edit
+            </button>
+            <button class="btn btn-outline-danger btn-sm ml-3 'col md-2'">
+                Delete
+            </button>
+        </div> 
+    </div>
+    <!-- fin garages-->
+        
+        
+
+      
+        <!--BTN EDIT-->
+        <button type="submit" class="btn btn-primary mt-5">
+            Modifier User
+        </button>
+
+        <button type="submit" class="btn btn-danger mt-5 ml-5">
+           Delete User
+        </button>
+
+      <!--END BTN EDIT-->
+  </div>

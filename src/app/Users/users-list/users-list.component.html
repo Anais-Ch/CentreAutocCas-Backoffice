@@ -6,12 +6,21 @@
             <div class="card-body">
                 <h5 class="card-title mb-0">Liste utilisateurs</h5>
             </div>
-            <!--BTN ADD NEw USERS-->
+            <!--BTN ADD NEW USERS-->
             <div>
                 <button type="button" class="btn btn-success" routerLink="/users/add-user">
                   Ajouter un Utilisateur
                 </button>
             </div>
+            <!--NB USERS-->
+            <div class="text-right" >
+              <p>
+                Nombre total d'utilisateurs: <span class="font-weight-bold">{{this.listUser}}</span>
+              </p>
+
+            </div>
+            <!--FIN NB USERS-->
+            
            
             <!-- END Success message-->
             <div class="table-responsive">
@@ -25,16 +34,16 @@
                       <th scope="col" class="border-0 text-uppercase font-medium">Email</th>
                       <th scope="col" class="border-0 text-uppercase font-medium">Contact</th>
                       <th scope="col" class="border-0 text-uppercase font-medium">SIRET</th>
-                      <th scope="col" class="border-0 text-uppercase font-medium">Status</th>
+                      <th scope="col" class="border-0 text-uppercase font-medium">Total Users</th>
                       <th scope="col" class="border-0 text-uppercase font-medium"></th>
                     </tr>
 
-                    <!-- secodn line in table heade-->
+                    <!-- secodn line in table header-->
                     <tr>
                       <td>Identifiant</td>
                       
                       <td>
-                        <!-- LAst name search-->
+                        <!-- Last name search-->
                         <div>
                           <input type="text" class="form-control" [(ngModel)]="filters.lastName" name="lastName">
                         </div>
@@ -56,7 +65,7 @@
                           <button type='submit' class="btn btn-success">
                             Search
                           </button>
-                          <!--End BTN-->
+                        <!--End BTN-->
                       </div>
                     </td>
                     </tr>
@@ -85,17 +94,18 @@
                         <span class="text-muted">{{user.siret}}</span><br>
                       </td>
                       <td>
-                        <select class="form-control category-select" id="exampleFormControlSelect1">
-                          <option>Utilisateur</option>
-                          <option>Admin</option>
-                        </select>
+                        <span class="text-muted">{{this.listUser}}</span><br>
                       </td>
                       <td>
                         <!--BTN Delete using Delet user function with user.id as argument open modal-->
                         <button type="button" class="btn btn-danger" (click)="open(checkDelete)">Supprimer</button>
-                        <!--BTN send to the url of the edit page with the id-->
+                        <!--BTN EDIT send to the url of the edit page with the id-->
                         <button type="button" class="btn btn-primary" [routerLink]="['/users/users-administration', user.id]">
                           Modifier
+                        </button>
+                        <!--BTN USER VIEW to the url of the edit page with the id-->
+                        <button type="button" class="btn btn-primary" [routerLink]="['/users/user',user.id]">
+                          Detail user
                         </button>
                         <!--START POP UP-->
                           <ng-template #checkDelete let-modal>

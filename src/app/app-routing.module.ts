@@ -27,8 +27,10 @@ const routes: Routes = [
   {path:'users/users-list', component : UsersListComponent},
     //link between used and edit user with url path :id (add variable int the path)
   {path:'users/users-administration/:id', component : UsersAdministrationComponent},
+
+    //link between used and edit user with url path :id (add variable int the path)
+  {path:'users/user/:id', component: UserComponent},
   
-  {path:'users/user', component: UserComponent},
   {path:'users/add-user', component: AddUserComponent},
   //SEARCH RESULTS path  
   {path:'queries/ads-search-results', component: ResultsAdsSearchComponent},
