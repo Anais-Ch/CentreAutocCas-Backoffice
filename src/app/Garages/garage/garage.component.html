@@ -1,1 +1,189 @@
-<p>garage works!</p>
+<!--btn back to user list-->
+<div class="m-4">
+    <button type="button" class="btn btn-link" routerLink='/garages/garages-list'>
+        Back to garages list
+    </button>
+</div>
+<!--end  btn back to user list-->
+
+<div class="container">
+    <!--titre-->
+    <div class="text-center">
+        <h1 class="display-7">
+             {{currentGarage.owner}} : {{currentGarage.name}}
+        </h1> 
+    </div>
+    <!--fin titre-->
+
+
+    <!--ID-->
+    <div class="d-flex flex-row">
+        <h5 class="text-primary">ID</h5> <span class="ml-3 mr-3">{{currentGarage.id}}</span>
+    </div>
+    <!-- fin ID-->
+
+    <!-- Name-->
+    <div class="d-flex flex-row">
+         <h5 class="text-primary">Nom</h5> <span class="ml-3 mr-3">{{currentGarage.name}}</span>
+    </div>
+    <!-- fin Name-->
+
+    <!--Street-->
+    <div class="d-flex flex-row">
+         <h5 class="text-primary">Rue</h5> <span class="ml-3 mr-3">{{currentGarage.street}}</span> 
+    </div>
+    <!-- fin street-->
+
+    <!--Street complement-->
+    <div class="d-flex flex-row">
+        <h5 class="text-primary">Complément de rue</h5> <span class="ml-3 mr-3">{{currentGarage.streetComplement}}</span>
+    </div>
+    <!-- fin street complement-->
+
+    <!--postal code-->
+    <div class="d-flex flex-row">
+        <h5 class="text-primary">Code postal</h5> <span class="ml-3 mr-3">{{currentGarage.postalCode}}</span>
+    </div>
+    <!-- fin Postale code-->
+
+    <!--city-->
+    <div class="d-flex flex-row">
+         <h5 class="text-primary">Ville</h5> <span class="ml-3 mr-3" *ngIf="currentGarage.city !== null " >{{currentGarage.city}}</span> 
+    </div>
+    <!-- fin city-->
+
+    <!--Owner-->
+    <div class="d-flex flex-row">
+        <h5 class="text-primary">Propriétaire</h5> <span class="ml-3 mr-3">{{currentGarage.owner}}</span> 
+    </div>
+   <!-- fin Owner-->
+
+   <!--SIREN-->
+    <div class="d-flex flex-row">
+        <h5 class="text-primary">SIREN</h5> <span class="ml-3 mr-3">placeholder</span> 
+    </div>
+    <!-- fin SIREN-->
+
+    <!--phone-->
+    <div class="d-flex flex-row">
+        <h5 class="text-primary">téléphone</h5> <span class="ml-3 mr-3">placeholder</span> 
+    </div>
+    <!-- fin phone-->
+
+    <!--email-->
+    <div class="d-flex flex-row">
+        <h5 class="text-primary">E-mail</h5> <span class="ml-3 mr-3">placeholder</span> 
+    </div>
+    <!-- fin email-->
+
+    <!--Annonces-->
+    <div >
+        <div >
+            <h5 class="text-primary">Annonces</h5>
+        </div>
+    <!--<div *ngFor="let garage of this.currentGarage.annonces; let i=index"  class="m-2 row d. flex justify-content-start">
+            <span class="col-2">
+                {{this.currentGarage.annonce[i]}}
+            </span>
+            <button class="btn btn-outline-secondary btn-sm ml-3">
+                Edit
+            </button>
+            <button class="btn btn-outline-danger btn-sm ml-3">
+                Delete
+            </button>
+        </div> -->
+    </div>
+    <!-- fin garages-->
+        
+        
+
+      
+        <!--BTN EDIT-->
+        <button type="submit" class="btn btn-primary mt-5" [routerLink]="['/garages/garages-administration', currentGarage.id]">
+            Modifier User
+        </button>
+        <!--END BTN EDIT-->
+
+        <!-- BTN DELETE-->
+        <button type="submit" class="btn btn-danger mt-5 ml-5" (click)="open(checkDelete)">
+           Delete User
+        </button>
+
+      <!--END BTN DELETE-->
+    
+    </div>
+
+
+
+  <!-- POP UP 1-->
+
+  <!--START POP UP CHECK DELETE-->
+  <ng-template #checkDelete let-modal>
+
+    <div class="modal-header">
+
+      <h4 class="modal-title" id="modal-basic-title">Suppression</h4>
+
+    </div>
+
+    <div class="modal-body">
+
+      <p class="font-weight-bold">
+        Vous êtes sur le point de supprimer le garage <span class="text-danger">{{this.currentGarage.name}}</span> de <span class="text-danger">{{this.currentGarage.owner}}.</span>
+      </p>
+      <p>
+        Ceci entrainera la suppression de toutes les données liées au garages ainsi que ses annonces.
+      </p>
+      <p>
+        Etes vous sur de vouloir continuer? 
+      </p>
+      <br>
+      <p class="text-danger font-weight-bold">
+        Cette action est irréversible.
+      </p>
+      
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        Cancel
+      </button>
+
+      <button type="button" class="btn btn-danger" (click)="deletegarage(currentGarage.id); open(confirmDelete);modal.dismiss('Save Click')">Ok</button>
+
+    </div>
+
+  </ng-template>
+
+  <!--fin POP UP CHECK DELETE -->
+
+  <!--START POP UP CONFIRM DELETE-->
+ <ng-template #confirmDelete let-modal>
+
+    <div class="modal-header">
+  
+      <h4 class="modal-title" id="modal-basic-title">Suppression</h4>
+  
+      
+  
+    </div>
+  
+    <div class="modal-body">
+      <p>
+        Le garage à bien été supprimé
+      </p>
+    </div>
+  
+    <div class="modal-footer">
+      <button type="button" class="btn btn-success" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        Close
+      </button>
+  
+      
+  
+    </div>
+  
+  </ng-template>
+  
+  <!--fin POP UP-->
+  

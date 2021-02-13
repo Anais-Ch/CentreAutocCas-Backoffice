@@ -15,10 +15,9 @@ import { ConstraintViolationList } from 'src/app/models/constraint-violation-lis
 export class UserComponent implements OnInit {
 
   public violationList: ConstraintViolationList|null = null; //declare violationList var for Input correspondance
+  
   closeResult: string|undefined; //for modal
     
- // @Input()
-  //public user: User|null= null; //get User data in user var
 
   public currentUser: UserJsonld = {
     '@id': '',
@@ -36,10 +35,12 @@ export class UserComponent implements OnInit {
   }
 
   constructor(
+
     private httpClient: HttpClient, //add httpclient protocole to component
     public activatedRoute: ActivatedRoute,     
     public router: Router,
     private modalService: NgbModal, //for pop up   
+    
   ) { }
     
 
