@@ -1,3 +1,49 @@
+<!--NAVBAR-->
 
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" routerLink="">Navbar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="">DashBoard <span class="sr-only">(current)</span></a>
+        </li>
+        
+        <li class="nav-item dropdown">
+            <div ngbDropdown class="d-inline-block">
+                <button class="btn" id="dropdownBasic1" ngbDropdownToggle>Utilisateurs</button>
+                <div ngbDropdownMenu aria-labelledby="Users">
+                  <button ngbDropdownItem routerLink="/users/users-list">Liste Utilisateurs</button>
+                  <button ngbDropdownItem routerLink="/users/add-user">Nouvel Utilisateur</button>
+                </div>
+            </div>
+        </li>
+
+        <li class="nav-item dropdown">
+            <div ngbDropdown class="d-inline-block">
+                <button class="btn" id="dropdownBasic1" ngbDropdownToggle>Utilisateurs</button>
+                <div ngbDropdownMenu aria-labelledby="Garages">
+                  <button ngbDropdownItem routerLink="/garages/garages-list">Liste Garages</button>
+                  <button ngbDropdownItem routerLink="/garages/add-garage">Nouveau Garage</button>
+                </div>
+            </div>
+        </li>
+
+        <li class="nav-item dropdown">
+            <div ngbDropdown class="d-inline-block">
+                <button class="btn" id="dropdownBasic1" ngbDropdownToggle>Annonces</button>
+                <div ngbDropdownMenu aria-labelledby="Users">
+                  <button ngbDropdownItem routerLink="/ads/ads-list">Liste Annonces</button>
+                  <button ngbDropdownItem routerLink="/ads/add-ad">Nouvelle Annonce</button>
+                </div>
+            </div>
+        </li>
+
+      </ul>
+    </div>
+  </nav>
+  <!-- END NAVBAR-->
 
 <router-outlet></router-outlet>
