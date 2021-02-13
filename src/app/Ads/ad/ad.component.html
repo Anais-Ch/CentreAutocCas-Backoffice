@@ -1,1 +1,194 @@
-<p>ad works!</p>
+<!--btn back to user list-->
+<div class="m-4">
+    <button type="button" class="btn btn-link" routerLink='/ads/ads-list'>
+        Back to ads list
+    </button>
+</div>
+<!--end  btn back to user list-->
+
+<div class="container">
+    <!--titre-->
+    <div class="text-center">
+        <h1 class="display-7">
+            {{currentAd.title}} 
+        </h1> 
+    </div>
+    <!--fin titre-->
+    <!--ID-->
+    <div class="d-flex flex-row">
+        <h5 class="text-primary">ID</h5> <span class="ml-3 mr-3">{{currentAd.id}}</span>
+    </div>
+    <!-- fin ID-->
+
+    <!--garage-->
+    <div class="d-flex flex-row">
+        <h5 class="text-primary">Garage</h5> <span class="ml-3 mr-3">{{currentAd.garage}}</span> 
+    </div>
+    <!-- fin garage-->
+
+    <!--SIREN-->
+    <div class="d-flex flex-row">
+        <h5 class="text-primary">SIREN</h5> <span class="ml-3 mr-3">placeholder</span> 
+    </div>
+    <!-- SIREN-->
+
+    <!--Owner-->
+    <div class="d-flex flex-row">
+        <h5 class="text-primary">Propriétaire</h5> <span class="ml-3 mr-3">placeholder</span> 
+    </div>
+    <!-- fin owner-->
+
+    <!--title-->
+    <div class="d-flex flex-row">
+         <h5 class="text-primary">titre</h5> <span class="ml-3 mr-3">{{currentAd.title}}</span>
+    </div>
+    <!-- fin title-->
+
+    <!--release year-->
+    <div class="d-flex flex-row">
+        <h5 class="text-primary">Release year</h5> <span class="ml-3 mr-3">{{currentAd.releaseYear}}</span>
+    </div>
+    <!-- fin realease year-->
+
+    <!--km-->
+    <div class="d-flex flex-row">
+        <h5 class="text-primary">Kilométrage</h5> <span class="ml-3 mr-3">{{currentAd.km}}</span>
+    </div>
+    <!-- fin km-->
+
+    <!--price-->
+    <div class="d-flex flex-row">
+         <h5 class="text-primary">Prix</h5> <span class="ml-3 mr-3">{{currentAd.price}}</span> 
+    </div>
+    <!-- fin price-->
+
+    <!--brand-->
+    <div class="d-flex flex-row">
+        <h5 class="text-primary">Marque</h5> <span class="ml-3 mr-3">{{currentAd.brand}}</span> 
+    </div>
+    <!-- fin price-->
+
+    <!--model-->
+    <div class="d-flex flex-row">
+        <h5 class="text-primary">Modèle</h5> <span class="ml-3 mr-3">{{currentAd.model}}</span> 
+    </div>
+    <!-- fin model-->
+
+    <!--fuel-->
+    <div class="d-flex flex-row">
+        <h5 class="text-primary">Carburant</h5> <span class="ml-3 mr-3" *ngIf="currentAd.fuel !== null ">{{currentAd.fuel}}</span> 
+    </div>
+    <!-- fin fuel-->
+
+
+    <!--date-->
+    <div class="d-flex flex-row">
+        <h5 class="text-primary">Date de création</h5> <span class="ml-3 mr-3">placeholder</span> 
+    </div>
+    <!-- date-->
+
+    <!--statut-->
+    <div class="d-flex flex-row">
+        <h5 class="text-primary">Statut</h5> <span class="ml-3 mr-3">placeholder</span> 
+    </div>
+    <!-- statut-->
+
+    <!--sold out date-->
+    <div class="d-flex flex-row">
+        <h5 class="text-primary">Date de vente</h5> <span class="ml-3 mr-3">placeholder</span> 
+    </div>
+    <!-- sold out date-->
+
+    <!--description-->
+    <div class="d-flex flex-row">
+        <h5 class="text-primary">Description</h5> <span class="ml-3 mr-3">{{currentAd.description}}</span> 
+    </div>
+    <!-- fin description-->
+      
+        <!--BTN EDIT-->
+        <button type="submit" class="btn btn-primary mt-5" [routerLink]="['/ads/ads-administration', currentAd.id]">
+            Modifier l'annonce
+        </button>
+        <!--END BTN EDIT-->
+
+        <!-- BTN DELETE-->
+        <button type="submit" class="btn btn-danger mt-5 ml-5" (click)="open(checkDelete)">
+           Supprimer l'annonce
+        </button>
+
+      <!--END BTN DELETE-->
+  </div>
+
+
+  <!-- POP UP 1-->
+
+  <!--START POP UP CHECK DELETE-->
+  <ng-template #checkDelete let-modal>
+
+    <div class="modal-header">
+
+      <h4 class="modal-title" id="modal-basic-title">Suppression</h4>
+
+    </div>
+
+    <div class="modal-body">
+
+      <p class="font-weight-bold">
+        Vous êtes sur le point de supprimer l'annonce <span class="text-danger">{{this.currentAd.title}}</span>  du garage <span class="text-danger">{{this.currentAd.garage}}</span>.
+      </p>
+      <p>
+        Ceci entrainera la suppression de toutes les données liées à l'annonce.
+      </p>
+      <p>
+        Etes vous sur de vouloir continuer? 
+      </p>
+      <br>
+      <p class="text-danger font-weight-bold">
+        Cette action est irréversible.
+      </p>
+      
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        Cancel
+      </button>
+
+      <button type="button" class="btn btn-danger" (click)="deleteAd(currentAd.id); open(confirmDelete);modal.dismiss('Save Click')">Ok</button>
+
+    </div>
+
+  </ng-template>
+
+  <!--fin POP UP CHECK DELETE -->
+
+  <!--START POP UP CONFIRM DELETE-->
+ <ng-template #confirmDelete let-modal>
+
+    <div class="modal-header">
+  
+      <h4 class="modal-title" id="modal-basic-title">Suppression</h4>
+  
+      
+  
+    </div>
+  
+    <div class="modal-body">
+      <p>
+        L'annonce à bien été supprimée
+      </p>
+    </div>
+  
+    <div class="modal-footer">
+      <button type="button" class="btn btn-success" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        Close
+      </button>
+  
+      
+  
+    </div>
+  
+  </ng-template>
+  
+  <!--fin POP UP-->
+  

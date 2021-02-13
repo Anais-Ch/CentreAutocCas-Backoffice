@@ -40,19 +40,24 @@ export class UserComponent implements OnInit {
     public activatedRoute: ActivatedRoute,     
     public router: Router,
     private modalService: NgbModal, //for pop up   
-    
+
   ) { }
     
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe( (params) => {
+
       this.httpClient.get<UserJsonld>('https://hb-bc-dwwm-2020.deploy.this-serv.com/api/users/' + params.id).subscribe( {
-        next: (currentUser: UserJsonld) => {
-          //console.log(user);
+        
+      next: (currentUser: UserJsonld) => {
+          
+        //console.log(user);
           this.currentUser = currentUser;
         },
+
         error: (err: HttpErrorResponse) => {
-         alert(err.status + ' - ' + err.statusText)
+         
+          alert(err.status + ' - ' + err.statusText)
         }
       })
 

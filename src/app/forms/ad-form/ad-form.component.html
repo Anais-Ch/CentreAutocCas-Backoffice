@@ -20,13 +20,13 @@
   <!--Descritpion-->
     <div class="form-group">
       <label for="description">Description</label>
-      <input type="text"
+      <textarea class="form-control"type="text"
              class="form-control"
              id="description"
              aria-describedby="descriptionHelp"
              [(ngModel)]="ad.description"
              name="description"
-      >
+      ></textarea>
       <small id="descriptionNameHelp" class="form-text text-muted">Enter here the first name of the street for the.</small>
     
       <!--display error message from API-->
