@@ -34,13 +34,18 @@
                       <th scope="col" class="border-0 text-uppercase font-medium">Email</th>
                       <th scope="col" class="border-0 text-uppercase font-medium">Contact</th>
                       <th scope="col" class="border-0 text-uppercase font-medium">SIRET</th>
-                      <th scope="col" class="border-0 text-uppercase font-medium">Total Users</th>
                       <th scope="col" class="border-0 text-uppercase font-medium"></th>
                     </tr>
 
                     <!-- secodn line in table header-->
                     <tr>
-                      <td>Identifiant</td>
+                      <td>
+                        <!-- ID search-->
+                        <div>
+                          <input type="text" class="form-control" [(ngModel)]="filters.id" name="id">
+                        </div>
+                        <!--end input-->
+                      </td>
                       
                       <td>
                         <!-- Last name search-->
@@ -49,16 +54,31 @@
                         </div>
                         <!--end input-->
                      </td>
+
                       <td>
                          <!-- Input for email search-->
                         <div class="form-group">
-                          <input type="text" class="form-control" [(ngModel)]="filters.email" name="email"> 
+                          <input type="email" class="form-control" [(ngModel)]="filters.email" name="email"> 
                         </div>
                         <!--end input-->
                       </td>
-                      <td>Contact</td>
-                      <td>SIRET</td>
-                      <td>Status</td>
+
+                      <td>
+                         <!-- Input for phone search-->
+                        <div class="form-group">
+                          <input type="text" class="form-control" [(ngModel)]="filters.phone" name="phone"> 
+                        </div>
+                        <!--end input-->
+                      </td>
+
+                      <td>
+                        <!-- Input for SIRET search-->
+                        <div class="form-group">
+                          <input type="text" class="form-control" [(ngModel)]="filters.siret" name="siret"> 
+                        </div>
+                        <!--end input-->
+                      </td>
+
                       <td>
                         <!--BTN SEARCH-->
                         <div>
@@ -68,6 +88,7 @@
                         <!--End BTN-->
                       </div>
                     </td>
+
                     </tr>
                     <!--fin second line-->
                   
@@ -85,28 +106,30 @@
                         <span class="text-muted">{{user.email}}</span><br>
                       </td>
                       <td>
-                        <span class="text-muted">7 rue du port </span><br>
-                        <span class="text-muted">63 000 Clermont-fd </span><br>
                         <span class="text-muted">{{user.phone}}</span><br>
-                        <span class="text-muted">06 85 98 74 10</span><br>
+
                       </td>
                       <td>
                         <span class="text-muted">{{user.siret}}</span><br>
                       </td>
                       <td>
-                        <span class="text-muted">{{this.listUser}}</span><br>
-                      </td>
-                      <td>
+
                         <!--BTN Delete using Delet user function with user.id as argument open modal-->
-                        <button type="button" class="btn btn-danger" (click)="open(checkDelete)">Supprimer</button>
+                        <button type="button" class="btn btn-danger btn-sm m-1" (click)="open(checkDelete)">
+                          Supprimer
+                        </button>
+
                         <!--BTN EDIT send to the url of the edit page with the id-->
-                        <button type="button" class="btn btn-primary" [routerLink]="['/users/users-administration', user.id]">
+                        <button type="button" class="btn btn-primary btn-sm m-1" [routerLink]="['/users/users-administration',user.id]">
                           Modifier
                         </button>
+
                         <!--BTN USER VIEW to the url of the edit page with the id-->
-                        <button type="button" class="btn btn-primary" [routerLink]="['/users/user',user.id]">
+                        <button type="button" class="btn btn-info btn-sm m-1" [routerLink]="['/users/user',user.id]">
                           Detail user
                         </button>
+
+
                         <!--START POP UP-->
                           <ng-template #checkDelete let-modal>
 

@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, Type} from '@angular/core';
-import { UserCollectionFilter } from 'src/app/forms/user-collection-filter.f';
+import { UserCollectionFilter } from 'src/app/forms/user-collection-filter';
 import { ConstraintViolationList } from 'src/app/models/constraint-violation-list';
 import { UserCollection } from 'src/app/models/user-collection';
 import { UserJsonld } from 'src/app/models/user-jsonld';
@@ -15,14 +15,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./users-list.component.scss']
 })
 export class UsersListComponent implements OnInit {
+  
   closeResult: string | undefined; //modal
   public listUser: number = 0; //var to get hydra:totalItems
 
   public users: Array<UserJsonld> = []; //empty array to retrieve the data from our get request
  
+  //pagination
   public prevLink: string|null = null; //met la valeur de balises à null
   public nextLink: string|null = null;//met la valeur des balise à null pour els cacher
-  
   public lastPage: number|null =null; //set last page valuie at null
 
   public violationList: ConstraintViolationList|null = null; //declare violationList var for Input correspondance
@@ -31,6 +32,9 @@ export class UsersListComponent implements OnInit {
   public filters: UserCollectionFilter= { //object to fill when retriveing onfo for a filters
     email: '', 
     lastName:'',
+    phone: '',
+    siret: '',
+    id: null,
   }
 
   
@@ -38,7 +42,7 @@ export class UsersListComponent implements OnInit {
   constructor(
     private httpClient: HttpClient, //bind httpclient to the component*
     private modalService: NgbModal, //for pop up 
-    private router: Router, //allow redirction fo page
+    private router: Router, //allow redirction to other pages
     
   ) { }
 
@@ -76,7 +80,7 @@ export class UsersListComponent implements OnInit {
         if (key in this.filters) {
           const val= this.filters[key as keyof UserCollectionFilter];
 
-          if(val !== '') {
+          if(val !== null && val !== '') {
             url += '&' + key + '=' + val;
           }
         }
@@ -86,6 +90,7 @@ export class UsersListComponent implements OnInit {
   
     //Loading page methode on private since it's only called in ts
     private loadPage(page:string): void{
+
       //bind the get to the API URL (without garage or users etc specifiaction) + page for pagination
       this.httpClient.get<UserCollection>('https:/hb-bc-dwwm-2020.deploy.this-serv.com' + page).subscribe((data)=>{
         this.users = data['hydra:member'];//fill the array garages with data from the API
@@ -94,6 +99,7 @@ export class UsersListComponent implements OnInit {
         if (data['hydra:view']['hydra:next'] === undefined) {  //if no next page
           this.nextLink = null;// retrieve hydra:next into hydra:view /nextLink is set on null the btn disappear
         }
+
         else { //else next link var is set to data from hydra:next and is displayed
           this.nextLink = data['hydra:view']['hydra:next'];
         }
@@ -103,6 +109,7 @@ export class UsersListComponent implements OnInit {
           this.prevLink = null; //prevLink is set on null the btn disappear
         
         }
+
         else { //else prevlink var is set to data from hydra:previous and is displayed
           this.prevLink= data['hydra:view']['hydra:previous'];
         }
@@ -111,6 +118,7 @@ export class UsersListComponent implements OnInit {
           this.lastPage = null; //LastPage is set on null no btn dispplay
         
         }
+
         else { 
           //'/api/users?pages=1'
           const regex = /\.*page=([0-9]+)/;// définit le type de résultat attendu ?page=chiffreentre 1et 9
@@ -124,6 +132,7 @@ export class UsersListComponent implements OnInit {
           if (matches === null) {
             this.lastPage = null;
           }
+
           else{
             this.lastPage = parseInt(matches[1]);
           }
@@ -134,6 +143,7 @@ export class UsersListComponent implements OnInit {
 
     //methode for loading next page
     public loadNextPage(): void { //called on click
+
       if(this.nextLink !==null){ //if nextLink is set on hydra:next data
         this.loadPage(this.nextLink);//methode loadPage for number set in nextLink
       }
@@ -170,6 +180,7 @@ export class UsersListComponent implements OnInit {
     //Method DeleteUSer
     //retrieve user id in html call of the function
     public deleteUser(id: number): void {
+
       this.httpClient.delete('https://hb-bc-dwwm-2020.deploy.this-serv.com/api/users/'+ id).subscribe({
         next : () => {
 
@@ -177,12 +188,14 @@ export class UsersListComponent implements OnInit {
           this.countUser();// refresh count users
         },
         error : (err: HttpErrorResponse) => { //error message
+         
           if (err.status === 404) {
             this.violationList = err.error; //retrieve error form api message
             alert (err.error['hydra:description']); 
            
           }
           else { // inform iuser that an error has occured (need to dispaly a better message (error unexpected))
+           
             alert(err.status + '- An error as occured.');
           }
         },

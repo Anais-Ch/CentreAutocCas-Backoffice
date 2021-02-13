@@ -36,7 +36,8 @@ export class UsersAdministrationComponent implements OnInit {
     this.activatedRoute.params.subscribe((params) => {
       //params.Yourvar
       this.httpClient.get<UserJsonld>('https://hb-bc-dwwm-2020.deploy.this-serv.com/api/users/' + params.id).subscribe({
-      next: (user: UserJsonld) => {
+        
+        next: (user: UserJsonld) => {
         this.user = user;
       },
       error: (err: HttpErrorResponse) => {
@@ -48,21 +49,27 @@ export class UsersAdministrationComponent implements OnInit {
 
   }
 
+  //create new user and error status 
+
   public submit(user: User): void {
     this.httpClient.put<UserJsonld>('https://hb-bc-dwwm-2020.deploy.this-serv.com/api/users/' + this.user?.id, user).subscribe({
+     
       next: (createdUser) => {
-        this.router.navigate(['/users/list']);
+        
+        this.router.navigate(['/users/users-list']);
       },
       error: (err: HttpErrorResponse) => {
+        
         if(err.status === 422) {
+          
           this.violationList = err.error;
         }
         else {
+          
           alert(err.status + ' - An error occured.');
         }
       },
     });
-
   }
 
 

@@ -1,6 +1,6 @@
 <!--form-->
 
-<form #userForm="ngForm" (ngSubmit)="submit()">
+<form #adForm="ngForm" (ngSubmit)="submit()">
 
     <!--title-->
     <div class="form-group">
@@ -16,7 +16,7 @@
     </div>
   <!--Descritpion-->
     <div class="form-group">
-      <label for="description">description</label>
+      <label for="description">Description</label>
       <input type="text"
              class="form-control"
              id="description"
@@ -42,14 +42,14 @@
       <!--KM-->
     <div class="form-group">
         <label for="km">Km</label>
-        <input type="text"
+        <input type="number"
                class="form-control"
                id="km"
                aria-describedby="kmHelp"
                [(ngModel)]="listing.km"
                name="km"
         >
-        <small id="kmHelp" class="form-text text-muted">Enter here the kmof the car.</small>
+        <small id="kmHelp" class="form-text text-muted">Enter here the number of km of the car.</small>
       </div>
       <!--price-->
     <div class="form-group">

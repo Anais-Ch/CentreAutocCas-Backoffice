@@ -10,6 +10,16 @@
       </button>
     </div>
     <!--END BTN-->
+
+    <!--NB USERS-->
+    <div class="text-right" >
+      <p>
+        Nombre total de garages: <span class="font-weight-bold">{{this.listGarages}}</span>
+      </p>
+
+    </div>
+    <!--FIN NB USERS-->
+
     <!--form-->
     <form #Filters="ngForm" (ngSubmit)="applyFilters()">
       <!--gagrages list-->
@@ -20,7 +30,7 @@
               <th scope="col">ID</th>
               <th scope="col">Propriétaire</th>
               <th scope="col">Nom</th>
-              <th scope="col">Adresse</th>
+              <th scope="col">Code postal</th>
               <th scope="col">téléphone</th>
               <th scope="col">SIREN</th>
               <th>Recherche</th>
@@ -28,22 +38,22 @@
             <!--SEARCH ROW-->
             <tr>
               <th scope="col">
-                ID
+                <input type="text" class="form-control" [(ngModel)]="filters.id" name="id">
               </th>
               <th scope="col">
-                <input type="text" class="form-control" [(ngModel)]="filterOwner" name="owner">
+                <input type="text" class="form-control" [(ngModel)]="filters.owner" name="owner">
               </th>
               <th scope="col">
-                <input type="text" class="form-control" [(ngModel)]="filterName" name="name">
+                <input type="text" class="form-control" [(ngModel)]="filters.name" name="name">
               </th>
               <th scope="col">
-                Adresse
+                <input type="text" class="form-control" [(ngModel)]="filters.postalCode" name="posstalCode">
               </th>
               <th scope="col">
-                téléphone
+                <input type="text" class="form-control" name="phone" disabled placeholder="disabled">
               </th>
               <th scope="col">
-                SIREN
+                <input type="text" class="form-control" name="siren" disabled placeholder="disabled">
               </th>
               <th>
                 <!--BTN SEARCH-->
@@ -61,11 +71,81 @@
               <!--row template-->
             <tr *ngFor="let garage of garages"><!--loop on garages-->
               <th scope="row">{{garage.id}}</th>
+
               <td>{{garage.owner}}</td>
+              
               <td>{{garage.name}}</td>
-              <td>{{garage.streetComplement}}</td>
+
+              <td>{{garage.postalCode}}</td>
+              
               <td>placeholder </td>
               <td>placeholder</td>
+              <td>
+
+
+                  <div>
+                    <!--BTN DELETE START-->
+                    <button type="button" class="btn btn-danger btn-sm m-1" (click)="open(checkDelete)">
+                      Supprimer
+                    </button>
+
+                    <!--BTN EDIT send to the url of the edit page with the id-->
+                    <button type="button" class="btn btn-primary btn-sm m-1" [routerLink]="['/garages/garages-administration',garage.id]">
+                      Modifier
+                    </button>
+
+                    <!--BTN USER VIEW to the url of the edit page with the id-->
+                    <button type="button" class="btn btn-info btn-sm m-1" [routerLink]="['/garages/garage',garage.id]">
+                      Detail user
+                    </button>
+                    <!--BTN DELETE END-->
+                  </div>
+
+
+                  <!--START CHECK DELETE POP UP-->
+                  <ng-template #checkDelete let-modal>
+
+                    <div class="modal-header">
+
+                      <h4 class="modal-title" id="modal-basic-title">Suppression</h4>
+
+                      
+
+                    </div>
+
+                    <div class="modal-body">
+
+                      <p class="font-weight-bold">
+                        Vous êtes sur le point de supprimer le garage <span class="text-danger">{{this.garage.name}}</span> de l'utlisateur <span class="text-danger">{{this.garage.owner}}</span>.
+                      </p>
+                      <p>
+                        Ceci entrainera aussi la suppression des annonces liées au garage.
+                      </p>
+                      <p>
+                        Etes vous sur de vouloir continuer? 
+                      </p>
+                      <br>
+                      <p class="text-danger font-weight-bold">
+                        Cette action est irréversible.
+                      </p>
+                      
+                    </div>
+
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                        Cancel
+                      </button>
+
+                      <button type="button" class="btn btn-danger" (click)="deleteGarage(garage.id); open(confirmDelete);modal.dismiss('Save Click')">Ok</button>
+
+                    </div>
+
+                  </ng-template>
+
+                  <!--fin CHECK DELETE POP UP-->
+
+
+              </td>
             </tr>
             <!--End row template-->
           </tbody>
@@ -83,11 +163,7 @@
             <a class="page-link" (click)="loadLastpage()">
               Previous
             </a>
-          </li><!--affcihe lien si valeur dans el link-->
-          
-          <!--<li class="page-item"><a class="page-link" href="#">1</a></li>
-          <li class="page-item"><a class="page-link" href="#">2</a></li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>-->
+          </li><!--affcihe lien si valeur dans lz link-->
           
           <!--ALL PAGES-->
           <!--displayed btns for all avaialable-->
@@ -111,3 +187,34 @@
       <!-- end pagination-->
 
 </div>
+
+
+ <!--START POP UP CONFIRM DELETE-->
+ <ng-template #confirmDelete let-modal>
+
+  <div class="modal-header">
+
+    <h4 class="modal-title" id="modal-basic-title">Suppression</h4>
+
+    
+
+  </div>
+
+  <div class="modal-body">
+    <p>
+      Le garage à bien été supprimé.
+    </p>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      Close
+    </button>
+
+    
+
+  </div>
+
+</ng-template>
+
+<!--fin POP UP-->

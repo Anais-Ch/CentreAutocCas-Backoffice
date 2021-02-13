@@ -66,7 +66,7 @@ export class UserComponent implements OnInit {
       this.httpClient.delete('https://hb-bc-dwwm-2020.deploy.this-serv.com/api/users/'+ id).subscribe({
         next : () => {
 
-          //redirection
+          //redirection on users list
           this.router.navigate(['/users/users-list']);
         },
         error : (err: HttpErrorResponse) => { //error message

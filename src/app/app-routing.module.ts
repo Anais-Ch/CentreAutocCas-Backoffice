@@ -23,8 +23,11 @@ const routes: Routes = [
   {path:'login', component: LoginComponent},
   //HOMEPAGE path
   {path:'', component: DashboardComponent},
+
+
   //USERS related pages paths
   {path:'users/users-list', component : UsersListComponent},
+
     //link between used and edit user with url path :id (add variable int the path)
   {path:'users/users-administration/:id', component : UsersAdministrationComponent},
 
@@ -32,13 +35,24 @@ const routes: Routes = [
   {path:'users/user/:id', component: UserComponent},
   
   {path:'users/add-user', component: AddUserComponent},
+
+
   //SEARCH RESULTS path  
   {path:'queries/ads-search-results', component: ResultsAdsSearchComponent},
+
+
   //GARAGES related pages paths
   {path:'garages/garages-list', component: GaragesListComponent},
-  {path:'garages/garages-administration', component: GaragesAdministrationComponent},
-  {path:'garages/garage', component: GarageComponent},
+
+    //link between used and edit user with url path :id (add variable int the path)
+  {path:'garages/garages-administration/:id', component: GaragesAdministrationComponent},
+
+    //link between used and edit user with url path :id (add variable int the path)
+  {path:'garages/garage/:id', component: GarageComponent},
+
   {path: 'garages/add-garage', component: AddGarageComponent},
+
+
   //ADS related pages path  
   {path:'ads/ad', component: AdComponent},
   {path:'ads/ads-administartion', component: AdsAdministrationComponent},

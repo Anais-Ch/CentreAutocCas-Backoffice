@@ -18,7 +18,7 @@ export class AdFormComponent implements OnInit {
     price:'',
     brand: '',
     model: '',
-    fuel: '',
+    fuel: undefined,
     garage: '',    
   };
 

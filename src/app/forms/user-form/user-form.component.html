@@ -5,6 +5,7 @@
 
       <!--input LAST NAME-->
       <div class="form-group">
+
         <label for="last-name">Last name</label>
         <input type="text"
               class="form-control"
@@ -16,6 +17,7 @@
         <small id="lastNameHelp" class="form-text text-muted">Enter here the last name of the user.</small>
         <!--display error message from API-->
         <small *ngFor="let err of retrieveErrors('lastName')" class="form-text text-danger">{{err}}</small>
+      
       </div>
       <!--input LAST NAME end-->
 

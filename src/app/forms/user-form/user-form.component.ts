@@ -15,9 +15,10 @@ import { User } from 'src/app/models/users';
   
 
 })
-export class UserFormComponent implements OnInit {
 
-   
+
+export class UserFormComponent implements OnInit {
+ 
 
   @Input()
   public user: User|null= null; //variable for ngIf on form
@@ -29,12 +30,16 @@ export class UserFormComponent implements OnInit {
 
   //retrieveErrors methode return an array 'arr'
   public retrieveErrors(fieldName:string): Array<string> {
+    
     const arr: Array<string> = [];
 
     if (this.violationList !== null) {
+      
       for (const err of this.violationList.violations) { //get array viilaton from constraintViolationlist interface
+        
         if(err.propertyPath === fieldName) { //check if API message is one of the API KNown error
-        arr.push(err.message); //if error is known push message from API in arrauy 'arrr' 
+          
+          arr.push(err.message); //if error is known push message from API in arrauy 'arrr' 
         }
       } 
     }
