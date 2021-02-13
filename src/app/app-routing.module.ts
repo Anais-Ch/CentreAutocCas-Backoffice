@@ -44,7 +44,7 @@ const routes: Routes = [
   //GARAGES related pages paths
   {path:'garages/garages-list', component: GaragesListComponent},
 
-    //link between used and edit user with url path :id (add variable int the path)
+    
   {path:'garages/garages-administration/:id', component: GaragesAdministrationComponent},
 
     //link between used and edit user with url path :id (add variable int the path)
@@ -53,9 +53,13 @@ const routes: Routes = [
   {path: 'garages/add-garage', component: AddGarageComponent},
 
 
-  //ADS related pages path  
-  {path:'ads/ad', component: AdComponent},
-  {path:'ads/ads-administartion', component: AdsAdministrationComponent},
+  //ADS related pages path
+    //link between used and edit user with url path :id (add variable int the path)
+  {path:'ads/ad/:id', component: AdComponent},
+
+  //link between used and edit user with url path :id (add variable int the path)
+  {path:'ads/ads-administration/:id', component: AdsAdministrationComponent},
+
   {path:'ads/ads-list', component: AdsListComponent},
   {path: 'ads/add-ad', component: AddAdComponent},
 ];

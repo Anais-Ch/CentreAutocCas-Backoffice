@@ -10,50 +10,243 @@
       </button>
     </div>
     <!--END BTN-->
-    <!--gagrages list-->
-    <table class="table table-striped table-dark">
-        <thead>
-            <!--table header-->
-          <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Propriétaire</th>
-            <th scope="col">Titre</th>
-            <th scope="col">Garage</th>
-            <th scope="col">Date</th>
-            <th scope="col">Status</th>
-          </tr>
-        </thead>
-        <tbody>
-            <!--row template-->
-          <tr *ngFor="let ad of ads"><!--loop on garages-->
-            <th scope="row">{{ad.id}}</th>
-            <td>placeholder</td>
-            <td>{{ad.title}}</td>
-            <td>{{ad.garage}}</td>
-            <td>placeholder </td>
-            <td>placeholder</td>
-          </tr>
-          <!--fin row template-->
-        </tbody>
-      </table>
-      <!--pagination-->
-      <nav aria-label="Page navigation example">
-        <ul class="pagination">
-          <!--PREVIOUS-->
-          <!--displayed only if previousprevLink data exists-->
-          <!--methode to load pages on click-->
-          <li class="page-item" *ngIf="prevLink !== null"><a class="page-link" (click)="loadLastpage()">Previous</a></li><!--affcihe lien si valeur dans el link-->
-          
-          <!--<li class="page-item"><a class="page-link" href="#">1</a></li>
-          <li class="page-item"><a class="page-link" href="#">2</a></li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>-->
-          
-          <!--NEXT-->
-          <!--displayed only if next prevLink data exists-->
-          <!--methode to load pages on click-->
-          <li class="page-item" *ngIf="nextLink !== null"><a class="page-link" (click)="loadNextpage()">Next</a></li><!--methond load on click-->
-        </ul>
-      </nav>
-      <!-- end pagination-->
+
+    <!--NB USERS-->
+    <div class="text-right">
+      <p>
+        Nombre total d'annonces: <span class="font-weight-bold">{{this.listAds}}</span>
+      </p>
+
+    </div>
+    <!--FIN NB USERS-->
+
+    
+    <!--START FORM-->
+    <form #Filters="ngForm" (ngSubmit)="applyFilters()">
+
+      <!--gagrages list-->
+      <table class="table table-striped table-dark">
+          <thead>
+              <!--table header-->
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Propriétaire</th>
+              <th scope="col">Titre</th>
+              <th scope="col">Garage</th>
+              <th scope="col">Date</th>
+              <th scope="col">Status</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+
+
+          <tbody>
+
+             <!--SEARCH ROW-->
+            <tr><!--loop on garages-->
+              <th scope="row">
+                <!-- ID search-->
+                <div>
+                  <input type="text" class="form-control" [(ngModel)]="filters.id" name="id">
+                </div>
+                <!--end input-->
+              </th> 
+              <td>
+                <!-- OWner search-->
+                <div>
+                  <input type="text" class="form-control"  name="owner" disabled placeholder="disabled">
+                </div>
+                <!--end input-->
+              </td>
+
+              <td>
+                <!-- Title search-->
+                <div>
+                  <input type="text" class="form-control" [(ngModel)]="filters.title" name="title">
+                </div>
+                <!--end input-->
+              </td>
+
+              <td>
+                <!-- Garage search-->
+                <div>
+                  <input type="text" class="form-control" [(ngModel)]="filters.garage" name="garage">
+                </div>
+                <!--end input-->
+              </td>
+
+              <td>
+                <!-- date search-->
+                <div>
+                  <input type="text" class="form-control" disabled name="date" placeholder="disabled">
+                </div>
+                <!--end input-->
+              </td>
+
+              <td>
+                <!-- status search-->
+                <div>
+                  <input type="text" class="form-control" disabled name="status" placeholder="disabled">
+                </div>
+                <!--end input-->
+              </td>
+
+              <td>
+                <!--  search    BTN-->
+                <div>
+                  <button type='submit' class="btn btn-success">
+                    Search
+                  </button>
+                </div>
+                <!--end BTN-->
+              </td>
+            </tr>
+            <!--END SEARCH ROW-->
+
+
+              <!--row template-->
+            <tr *ngFor="let ad of ads"><!--loop on garages-->
+              <th scope="row">
+                {{ad.id}}
+              </th>
+
+              <td>
+                placeholder
+              </td>
+
+              <td>
+                {{ad.title}}
+              </td>
+
+              <td>
+                {{ad.garage}}
+              </td>
+              <td>
+                placeholder
+              </td>
+
+              <td>
+                placeholder
+              </td>
+              <td>
+
+                <!--BTN Delete using Delet user function with user.id as argument open modal-->
+                <button type="button" class="btn btn-danger btn-sm m-1" (click)="open(checkDelete)">
+                  Supprimer
+                </button>
+
+                <!--BTN EDIT send to the url of the edit page with the id-->
+                <button type="button" class="btn btn-primary btn-sm m-1" [routerLink]="['/ads/ads-administration',ad.id]">
+                  Modifier
+                </button>
+
+                <!--BTN USER VIEW to the url of the edit page with the id-->
+                <button type="button" class="btn btn-info btn-sm m-1" [routerLink]="['/ads/ad',ad.id]">
+                  Detail user
+                </button>
+
+              </td>
+              <!--START CHECK DELETE POP UP-->
+           <ng-template #checkDelete let-modal>
+
+            <div class="modal-header">
+
+              <h4 class="modal-title" id="modal-basic-title">Suppression</h4>
+
+              
+
+            </div>
+
+            <div class="modal-body">
+
+              <p class="font-weight-bold">
+                Vous êtes sur le point de supprimer l'annonce <span class="text-danger">{{this.ad.title}}</span> du garage <span class="text-danger">{{this.ad.garage}}.</span>
+              </p>
+              <p>
+                Ceci entrainera la suppression de toutes les données liées l'annonce.
+              </p>
+              <p>
+                Etes vous sur de vouloir continuer? 
+              </p>
+              <br>
+              <p class="text-danger font-weight-bold">
+                Cette action est irréversible.
+              </p>
+              
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                Cancel
+              </button>
+
+              <button type="button" class="btn btn-danger" (click)="deleteAd(ad.id); open(confirmDelete);modal.dismiss('Save Click')">Ok</button>
+
+            </div>
+
+          </ng-template>
+
+          <!--fin CHECK DELETE POP UP-->
+            </tr>
+            <!--fin row template-->
+          </tbody>
+
+           
+
+
+        </table>
+      </form>
+    <!-- END FORM-->
+
+        <!--pagination-->
+        <nav aria-label="Page navigation example">
+          <ul class="pagination">
+
+            <!--PREVIOUS-->
+            <!--displayed only if previousprevLink data exists-->
+            <!--methode to load pages on click-->
+            <li class="page-item" *ngIf="prevLink !== null"><a class="page-link" (click)="loadLastpage()">Previous</a></li><!--affcihe lien si valeur dans el link-->
+        
+            
+            <!--NEXT-->
+            <!--displayed only if next prevLink data exists-->
+            <!--methode to load pages on click-->
+            <li class="page-item" *ngIf="nextLink !== null"><a class="page-link" (click)="loadNextpage()">Next</a></li><!--methond load on click-->
+          </ul>
+        </nav>
+        <!-- end pagination-->
+    
 
 </div>
+
+
+
+<!--START POP UP CONFIRM DELETE-->
+<ng-template #confirmDelete let-modal>
+
+  <div class="modal-header">
+
+    <h4 class="modal-title" id="modal-basic-title">Suppression</h4>
+
+    
+
+  </div>
+
+  <div class="modal-body">
+    <p>
+      L'annonce à bien été supprimée
+    </p>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      Close
+    </button>
+
+    
+
+  </div>
+
+</ng-template>
+
+<!--fin POP UP-->

@@ -1,1 +1,9 @@
-<p>ads-administration works!</p>
+<!--BTN back to ads list-->
+<div class="m-4">
+    <button type="button" class="btn btn-link" routerLink="/ads/ads-list">
+      Back to ads list
+    </button>
+  </div>
+  
+  <!--form-->
+  <app-ad-form [ad]="ad" [violationList]="violationList" (formSubmit)="submit($event)"></app-ad-form>

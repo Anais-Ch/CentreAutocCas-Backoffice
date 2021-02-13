@@ -56,7 +56,7 @@ export class UsersListComponent implements OnInit {
     //outside ngOnInit()
     
     
-    ///Methode ot retribve number of users from ['hydra:totalItems']
+    ///Methode to retrieve number of users from ['hydra:totalItems']
     
     public countUser():number {
       this.httpClient.get<UserCollection>('https:/hb-bc-dwwm-2020.deploy.this-serv.com/api/users').subscribe((data)=>{
@@ -85,10 +85,13 @@ export class UsersListComponent implements OnInit {
           }
         }
       }
-      this.loadPage(url)
+      this.loadPage(url);
     }
   
-    //Loading page methode on private since it's only called in ts
+
+
+
+    //LADING page methode on private since it's only called in ts
     private loadPage(page:string): void{
 
       //bind the get to the API URL (without garage or users etc specifiaction) + page for pagination

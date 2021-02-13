@@ -1,6 +1,6 @@
 <!--form-->
-
-<form #adForm="ngForm" (ngSubmit)="submit()">
+<div class="container">
+<form *ngIf="ad" #adForm="ngForm" (ngSubmit)="submit()">
 
     <!--title-->
     <div class="form-group">
@@ -9,10 +9,13 @@
              class="form-control"
              id="title"
              aria-describedby="titleNameHelp"
-             [(ngModel)]="listing.title"
+             [(ngModel)]="ad.title"
              name="title"
       >
       <small id="titleNameHelp" class="form-text text-muted">Enter here the ad's title .</small>
+      <!--display error message from API-->
+      <small *ngFor="let err of retrieveErrors('title')" class="form-text text-danger">{{err}}</small>
+    
     </div>
   <!--Descritpion-->
     <div class="form-group">
@@ -21,10 +24,14 @@
              class="form-control"
              id="description"
              aria-describedby="descriptionHelp"
-             [(ngModel)]="listing.description"
+             [(ngModel)]="ad.description"
              name="description"
       >
       <small id="descriptionNameHelp" class="form-text text-muted">Enter here the first name of the street for the.</small>
+    
+      <!--display error message from API-->
+      <small *ngFor="let err of retrieveErrors('description')" class="form-text text-danger">{{err}}</small>
+    
     </div>
 
     <!--release year-->
@@ -34,11 +41,16 @@
                class="form-control"
                id="realeaseYear"
                aria-describedby="releaseYear"
-               [(ngModel)]="listing.releaseYear"
+               [(ngModel)]="ad.releaseYear"
                name="release-year"
         >
         <small id="releaseYearHelp" class="form-text text-muted">Enter the released year of the car.</small>
+      
+        <!--display error message from API-->
+        <small *ngFor="let err of retrieveErrors('releaseYear')" class="form-text text-danger">{{err}}</small>
+      
       </div>
+
       <!--KM-->
     <div class="form-group">
         <label for="km">Km</label>
@@ -46,11 +58,17 @@
                class="form-control"
                id="km"
                aria-describedby="kmHelp"
-               [(ngModel)]="listing.km"
+               [(ngModel)]="ad.km"
                name="km"
         >
         <small id="kmHelp" class="form-text text-muted">Enter here the number of km of the car.</small>
+
+        <!--display error message from API-->
+        <small *ngFor="let err of retrieveErrors('km')" class="form-text text-danger">{{err}}</small>
+      
       </div>
+
+
       <!--price-->
     <div class="form-group">
         <label for="price">Price</label>
@@ -58,11 +76,17 @@
                class="form-control"
                id="price"
                aria-describedby="priceHelp"
-               [(ngModel)]="listing.price"
+               [(ngModel)]="ad.price"
                name="price"
         >
         <small id="priceHelp" class="form-text text-muted">Enter here the car's price.</small>
+      
+        <!--display error message from API-->
+        <small *ngFor="let err of retrieveErrors('price')" class="form-text text-danger">{{err}}</small>
+      
       </div>
+
+
 
        <!--brand-->
     <div class="form-group">
@@ -71,10 +95,14 @@
                class="form-control"
                id="brand"
                aria-describedby="brandHelp"
-               [(ngModel)]="listing.brand"
+               [(ngModel)]="ad.brand"
                name="brand"
         >
         <small id="brandHelp" class="form-text text-muted">Enter here the car's brand.</small>
+
+        <!--display error message from API-->
+        <small *ngFor="let err of retrieveErrors('brand')" class="form-text text-danger">{{err}}</small>
+      
       </div>
 
          <!--Model-->
@@ -84,10 +112,14 @@
                class="form-control"
                id="model"
                aria-describedby="modelHelp"
-               [(ngModel)]="listing.model"
+               [(ngModel)]="ad.model"
                name="model"
         >
         <small id="modelHelp" class="form-text text-muted">Enter here the car's model.</small>
+      
+        <!--display error message from API-->
+        <small *ngFor="let err of retrieveErrors('model')" class="form-text text-danger">{{err}}</small>
+      
       </div>
 
       <!--fuel-->
@@ -97,10 +129,14 @@
                class="form-control"
                id="fuel"
                aria-describedby="fuelHelp"
-               [(ngModel)]="listing.fuel"
+               [(ngModel)]="ad.fuel"
                name="fuel"
         >
         <small id="fuelHelp" class="form-text text-muted">Enter here the car's fuel.</small>
+      
+        <!--display error message from API-->
+        <small *ngFor="let err of retrieveErrors('fuel')" class="form-text text-danger">{{err}}</small>
+      
       </div>
 
       <!--garage-->
@@ -110,10 +146,14 @@
                class="form-control"
                id="garage"
                aria-describedby="garageHelp"
-               [(ngModel)]="listing.garage"
+               [(ngModel)]="ad.garage"
                name="garage"
         >
         <small id="garageHelp" class="form-text text-muted">Enter here the car's garage name.</small>
+      
+        <!--display error message from API-->
+        <small *ngFor="let err of retrieveErrors('garage')" class="form-text text-danger">{{err}}</small>
+      
       </div>
     <!--BTN SUBMIT-->
   
@@ -121,3 +161,4 @@
   </form>
 
 <!-- END form-->
+</div>

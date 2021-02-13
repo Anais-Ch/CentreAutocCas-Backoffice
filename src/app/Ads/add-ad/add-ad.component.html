@@ -5,4 +5,4 @@
     </button>
   </div>
   <!--Form-->
-  <app-ad-form></app-ad-form>
+  <app-ad-form [ad]="ad" [violationList]="violationList" (formSubmit)="submit($event)"></app-ad-form>
