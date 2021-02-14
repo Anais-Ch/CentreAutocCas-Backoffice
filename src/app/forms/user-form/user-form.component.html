@@ -86,7 +86,7 @@
       <!--input SIRET end-->
 
       <!--input GARAGES LIST -->
-      <div class="form-group" >
+      <div class="form-group" *ngIf="createUserUrl === false" >
 
         <label for="garagesList" class="mb-2">Garages List</label>
         <small id="garagesListHelp" class="form-text text-muted row-col mb-2 ml-3">User's garages list</small>
@@ -123,7 +123,18 @@
       <!--input GARAGES end-->
     
       <!--BTN create-->
-      <button type="submit" class="btn btn-success">Create the user</button>
+      <button type="submit" class="btn btn-success">
+        
+        <span *ngIf="createUserUrl === true">
+          Create the user
+        </span>
+
+        <span *ngIf="createUserUrl === false">
+          Modifier l'utilisateur
+        </span>
+      
+      
+      </button>
     </form>
     <!--Form END-->
 </div>
