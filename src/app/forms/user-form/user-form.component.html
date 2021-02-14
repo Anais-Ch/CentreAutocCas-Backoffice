@@ -92,7 +92,8 @@
         <small id="garagesListHelp" class="form-text text-muted row-col mb-2 ml-3">User's garages list</small>
 
         <div *ngFor="let garage of user.garages; let itemGarages = index" class='row d-flex justify-content-around m-2'>
-           <!--use [ngModelOptions]="{standalone: true}" so all agrages are displayed -->
+
+           <!--use [ngModelOptions]="{standalone: true}" so all garages are displayed -->
           <input *ngIf="user.garages !== undefined "
                 type="string"
                 class="form-control col-md-9"
@@ -102,14 +103,60 @@
                 [ngModelOptions]="{standalone: true}"
                 disabled 
           >
-          
+
+
           <div col-md>
             <!--BTN DELETE-->
-            <button type="submit" class="btn btn-outline-danger" >Delete garage</button>
+            <button type="submit" class="btn btn-outline-danger"  (click)="open(checkDelete)">Delete garage</button>
 
             <!--BTN EDIT-->
-            <button type="submit" class="btn btn-outline-primary ml-3">Edit garage</button>
+            <button  type="submit" class="btn btn-outline-primary ml-3" [routerLink]="['/garages/garages-administration',idGarage[itemGarages]]">Edit garage</button>
           </div>
+
+
+          <!--START POP UP-->
+          <ng-template #checkDelete let-modal>
+
+            <div class="modal-header">
+
+              <h4 class="modal-title" id="modal-basic-title">Suppression</h4>
+
+              
+
+            </div>
+
+            <div class="modal-body">
+
+              <p class="font-weight-bold">
+                Vous êtes sur le point de supprimer le garage de <span class="text-danger">{{this.idGarage[itemGarages]}} de {{this.user.lastName}} {{this.user.firstName}}.</span>
+              </p>
+              <p>
+                Ceci entrainera la suppression de toutes les données liées au garage et ses annonces).
+              </p>
+              <p>
+                Etes vous sur de vouloir continuer? 
+              </p>
+              <br>
+              <p class="text-danger font-weight-bold">
+                Cette action est irréversible.
+              </p>
+              
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                Cancel
+              </button>
+
+              <button type="button" class="btn btn-danger" (click)="deleteUser(this.idGarage[itemGarages]); open(confirmDelete);modal.dismiss('Save Click')">Ok</button>
+
+            </div>
+
+          </ng-template>
+
+          <!--fin POP UP-->
+          
+          
         
         </div>
         
@@ -138,3 +185,38 @@
     </form>
     <!--Form END-->
 </div>
+
+
+<!--START POP UP CONFIRM DELETE-->
+<ng-template #confirmDelete let-modal>
+
+  <div class="modal-header">
+
+    <h4 class="modal-title" id="modal-basic-title">Suppression</h4>
+
+    
+
+  </div>
+
+  <div class="modal-body">
+    <p>
+      Le garage à bien été supprimé
+    </p>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-success" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      Close
+    </button>
+
+    
+
+  </div>
+
+</ng-template>
+
+<!--fin POP UP-->
+
+
+
+

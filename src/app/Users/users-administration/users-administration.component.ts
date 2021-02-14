@@ -22,6 +22,10 @@ export class UsersAdministrationComponent implements OnInit {
 
   public violationList: ConstraintViolationList|null = null; //get constraint violation list object
 
+
+  /////// 
+  public idGarage: Array<number> = [];
+
   constructor(
     
     private httpClient: HttpClient,
@@ -29,8 +33,22 @@ export class UsersAdministrationComponent implements OnInit {
     private router: Router,
     
     ) { }
+    
+
+    //get URL
+  public createUserUrl: boolean = false;
+  public CurrentUrl:string = (window.location.href).toString();
+  public addUserUrl:string = 'http://localhost:4200/users/add-user';
 
   ngOnInit(): void {
+
+
+    /// COMPARE CURENT URL TO ADD-USER URL
+    if (this.CurrentUrl ===  this.addUserUrl){
+
+      this.createUserUrl =true;  
+  }
+
 
     //retrieve params from URL (defined in app-routing.module.ts).
     this.activatedRoute.params.subscribe((params) => {
@@ -39,6 +57,13 @@ export class UsersAdministrationComponent implements OnInit {
         
         next: (user: UserJsonld) => {
         this.user = user;
+        
+          //GET Actuel id from /api/garage/id  and push it in ifGarage Array
+        for (let garage of this.user.garages) {
+          this.idGarage.push(parseInt((garage.substring(13,(garage.length)))));
+
+        }
+
       },
       error: (err: HttpErrorResponse) => {
         ///need to handle error better than this
@@ -49,6 +74,8 @@ export class UsersAdministrationComponent implements OnInit {
 
   }
 
+  
+
   //create new user and error status 
 
   public submit(user: User): void {
@@ -56,7 +83,12 @@ export class UsersAdministrationComponent implements OnInit {
      
       next: (createdUser) => {
         
-        this.router.navigate(['/users/users-list']);
+        if (this.createUserUrl === true) {
+
+          this.router.navigate(['/users/users-list']);
+        
+        }       
+        
       },
       error: (err: HttpErrorResponse) => {
         
