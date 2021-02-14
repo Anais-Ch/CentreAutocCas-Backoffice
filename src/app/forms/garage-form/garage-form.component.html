@@ -104,7 +104,17 @@
         </div>
       <!--BTN SUBMIT-->
     
-      <button type="submit" class="btn btn-success">Create the garage</button>
+      <button type="submit" class="btn btn-success">
+        <span *ngIf="createUserUrl === true">
+          Créer le garage
+        </span>
+        
+        <span *ngIf="createUserUrl !== true">
+          Modifier le garage
+        </span>
+      
+        
+      </button>
     </form>
 
   <!-- END form-->

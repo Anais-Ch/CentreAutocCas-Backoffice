@@ -21,6 +21,13 @@ export class GarageFormComponent implements OnInit {
   @Output()
   public formSubmit = new EventEmitter<Garage>(); // to retrieve element  from $event custom in garage adminsitration
 
+
+  // var to compare URLs
+  public createUserUrl: boolean = false;
+  public CurrentUrl:string = (window.location.href).toString();
+  public addUserUrl:string = 'http://localhost:4200/garages/add-garagegit';
+
+
   
   //retrieveErrors methode return an array 'arr'
   public retrieveErrors(fieldName:string): Array<string> {
@@ -44,6 +51,11 @@ export class GarageFormComponent implements OnInit {
 
 
   ngOnInit(): void {
+    //check on url to determine which side of the form we are using
+    if (this.CurrentUrl ===  this.addUserUrl){
+
+      this.createUserUrl =true;  
+    }
   }
 
   public submit() {
