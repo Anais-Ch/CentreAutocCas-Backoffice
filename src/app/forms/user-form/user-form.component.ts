@@ -25,6 +25,7 @@ export class UserFormComponent implements OnInit {
 
   closeResult: string | undefined; //modal
 
+  //set currentid on input to be able to retrieve it on user form and use it from there to autocomplete the owner field on create new garage
   @Input()
   public currentUserId = 0;
  
@@ -193,7 +194,7 @@ export class UserFormComponent implements OnInit {
       });
     }
     
-    /// fonction to know which button as bee clicked
+    
 
     
 

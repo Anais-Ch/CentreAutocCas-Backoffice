@@ -22,7 +22,7 @@ export class UsersAdministrationComponent implements OnInit {
 
   public violationList: ConstraintViolationList|null = null; //get constraint violation list object
    
-  //set objet id
+  //set var to 0 to retrieve params
    public currentUserId: number = 0;
 
 
@@ -50,12 +50,12 @@ export class UsersAdministrationComponent implements OnInit {
     if (this.CurrentUrl ===  this.addUserUrl){
 
       this.createUserUrl =true;  
-  }
+    }
 
 
     //retrieve params from URL (defined in app-routing.module.ts).
     this.activatedRoute.params.subscribe((params) => {
-      //params.Yourvar
+      //het userid form params 
       this.currentUserId = params.id;
 
       this.httpClient.get<UserJsonld>('https://hb-bc-dwwm-2020.deploy.this-serv.com/api/users/' + params.id).subscribe({
