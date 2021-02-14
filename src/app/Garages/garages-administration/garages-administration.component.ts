@@ -124,7 +124,7 @@ export class GaragesAdministrationComponent implements OnInit {
   
 
   public submit(garage: Garage):void {
-    this.httpClient.put<GarageResourceJsonld>('https://hb-bc-dwwm-2020.deploy.this-serv.com/api/users/' + this.garage?.id, garage).subscribe({
+    this.httpClient.put<GarageResourceJsonld>('https://hb-bc-dwwm-2020.deploy.this-serv.com/api/garages/' + this.garage?.id, garage).subscribe({
      
       next: (createdGarage) => {
        

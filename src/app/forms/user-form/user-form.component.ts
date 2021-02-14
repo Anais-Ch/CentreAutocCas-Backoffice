@@ -24,6 +24,8 @@ export class UserFormComponent implements OnInit {
  
 
   closeResult: string | undefined; //modal
+
+
  
   @Input()
   public idGarage: Array<number> = [];
@@ -106,7 +108,7 @@ export class UserFormComponent implements OnInit {
         next : () => {
          
           location.reload();
-          //this.submit();
+          
         },
         error : (err: HttpErrorResponse) => { //error message
          
@@ -187,7 +189,14 @@ export class UserFormComponent implements OnInit {
       });
     }
     
+    /// fonction to know which button as bee clicked
 
+    
+
+    public editUser():void {
+
+      this.editBtn = true;
+    }
 
 
 

@@ -106,14 +106,17 @@
 
 
           <div col-md>
+            <form>
             <!--BTN DELETE-->
             <button type="submit" class="btn btn-outline-danger"  (click)="open(checkDelete)">Delete garage</button>
-
+            
             <!--BTN EDIT-->
             <button  type="submit" class="btn btn-outline-primary ml-3" [routerLink]="['/garages/garages-administration',idGarage[itemGarages]]">Edit garage</button>
+          
+            </form>
+
           </div>
-
-
+          
           <!--START POP UP-->
           <ng-template #checkDelete let-modal>
 
@@ -170,7 +173,7 @@
       <!--input GARAGES end-->
     
       <!--BTN create-->
-      <button type="submit" class="btn btn-success">
+      <button type="submit" class="btn btn-success" (click)="editUser()">
         
         <span *ngIf="createUserUrl === true">
           Create the user

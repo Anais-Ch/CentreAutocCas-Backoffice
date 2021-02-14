@@ -25,7 +25,7 @@ export class GarageFormComponent implements OnInit {
   // var to compare URLs
   public createUserUrl: boolean = false;
   public CurrentUrl:string = (window.location.href).toString();
-  public addUserUrl:string = 'http://localhost:4200/garages/add-garagegit';
+  public addUserUrl:string = 'http://localhost:4200/garages/add-garage';
 
 
   
