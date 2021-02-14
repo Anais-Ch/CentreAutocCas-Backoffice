@@ -24,6 +24,15 @@ export class AdFormComponent implements OnInit {
   public formSubmit = new EventEmitter<Listing>(); //send info from form
 
 
+  //Var to comapre urls
+
+  public createUserUrl: boolean = false;
+  public CurrentUrl:string = (window.location.href).toString();
+  public addUserUrl:string = 'http://localhost:4200/ads/add-ad';
+
+
+
+
   //retrieveErrors methode return an array 'arr'
   public retrieveErrors(fieldName:string): Array<string> {
     
@@ -50,6 +59,13 @@ export class AdFormComponent implements OnInit {
 
 
   ngOnInit(): void {
+
+    //check on url to determine which side of the form we are using
+    if (this.CurrentUrl ===  this.addUserUrl){
+
+      this.createUserUrl =true;  
+  }
+
   }
 
   //Outside ngOnInit

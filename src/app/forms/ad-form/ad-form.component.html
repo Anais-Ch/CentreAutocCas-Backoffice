@@ -157,7 +157,18 @@
       </div>
     <!--BTN SUBMIT-->
   
-    <button type="submit" class="btn btn-success">Create the ad</button>
+    <button type="submit" class="btn btn-success">
+      
+      <span *ngIf="createUserUrl === true">
+        Créer l'annonce
+      </span>
+
+      <span *ngIf="createUserUrl !== true">
+        Modifier l'annonce
+      </span>
+
+
+    </button>
   </form>
 
 <!-- END form-->
