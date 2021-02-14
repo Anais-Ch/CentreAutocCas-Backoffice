@@ -25,8 +25,10 @@ export class UserFormComponent implements OnInit {
 
   @Input()
   public violationList: ConstraintViolationList|null = null;
+  
   @Output()
   public formSubmit = new EventEmitter<User>(); //send info from form
+  
 
   //retrieveErrors methode return an array 'arr'
   public retrieveErrors(fieldName:string): Array<string> {

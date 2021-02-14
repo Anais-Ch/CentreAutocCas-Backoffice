@@ -58,37 +58,48 @@ export class UserComponent implements OnInit {
     
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe( (params) => {
-
-      this.httpClient.get<UserJsonld>('https://hb-bc-dwwm-2020.deploy.this-serv.com/api/users/' + params.id).subscribe( {
-        
-      next: (currentUser: UserJsonld) => {
-          
-        
-          this.currentUser = currentUser;
-          
-          //retrieve garage id only  and push  oit in array idGarage
-          for (let garage of currentUser.garages){
-            
-            //parseINT >> turninto an int , substring >> get part of the string defined between 13, garage.length ( 13th character to teh end of the string)
-
-            this.idGarage.push(parseInt((garage.substring(13,(garage.length)))));
-
-          };
-          
-        },
-
-        error: (err: HttpErrorResponse) => {
-         
-          alert(err.status + ' - ' + err.statusText)
-        }
-      })
-
-    });
+    this.fillPage();
 
        
   }
 
+  ////OUTISDE NG ON INIT
+
+  ///// method FILLPAGE
+
+  private fillPage(): void{
+
+    this.activatedRoute.params.subscribe( (params) => {
+
+        this.httpClient.get<UserJsonld>('https://hb-bc-dwwm-2020.deploy.this-serv.com/api/users/' + params.id).subscribe( {
+          
+        next: (currentUser: UserJsonld) => {
+            
+          
+            this.currentUser = currentUser;
+            
+            //retrieve garage id only  and push  oit in array idGarage
+            for (let garage of currentUser.garages){
+              
+              //parseINT >> turninto an int , substring >> get part of the string defined between 13, garage.length ( 13th character to teh end of the string)
+
+              this.idGarage.push(parseInt((garage.substring(13,(garage.length)))));
+
+            };
+            
+          },
+
+          error: (err: HttpErrorResponse) => {
+          
+            alert(err.status + ' - ' + err.statusText)
+          }
+        })
+
+      });
+
+
+  }
+  
 
 
   //Method DeleteUSer
@@ -126,8 +137,8 @@ export class UserComponent implements OnInit {
           this.httpClient.delete('https://hb-bc-dwwm-2020.deploy.this-serv.com/api/garages/'+ id).subscribe({
             next : () => {
 
-              //redirection on self
-              this.router.navigate(['/users/user', this.currentUser.id]);
+              //refresh page by calling  back fill page()
+              this.fillPage();
             },
             
             error : (err: HttpErrorResponse) => { //error message
