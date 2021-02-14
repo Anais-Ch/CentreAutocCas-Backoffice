@@ -27,6 +27,8 @@ export class AddUserComponent implements OnInit {
     garages: [],
   };
 
+
+  
   public violationList: ConstraintViolationList|null = null; //declare violationList var for Input correspondance
 
   ngOnInit(): void {

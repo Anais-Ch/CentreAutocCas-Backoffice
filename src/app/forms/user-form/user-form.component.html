@@ -104,7 +104,10 @@
           >
           
           <div col-md>
+            <!--BTN DELETE-->
             <button type="submit" class="btn btn-outline-danger" >Delete garage</button>
+
+            <!--BTN EDIT-->
             <button type="submit" class="btn btn-outline-primary ml-3">Edit garage</button>
           </div>
         
@@ -112,8 +115,9 @@
         
         <!--display error message from API-->
         <small *ngFor="let err of retrieveErrors('garages')" class="form-text text-danger">{{err}}</small>
-
-        <button type="submit" class="btn btn-outline-success  ml-3">New garage</button>
+        
+        <!--BTN NEW GARAGE-->
+        <button type="submit" class="btn btn-outline-success  ml-3" routerLink="/garages/add-garage">New garage</button>
 
       </div>
       <!--input GARAGES end-->

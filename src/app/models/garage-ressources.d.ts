@@ -5,7 +5,7 @@ export interface GarageResourceJsonld {
     '@id': string;
     '@type': string
     id:	number;
-    name?: string; //  can be null or do not exist
+    name: string; //  can be null or do not exist
     street?: string;//  can be null or do not exist
     streetComplement?: string;//  can be null or do not exist
     postalCode?: string;//  can be null or do not exist

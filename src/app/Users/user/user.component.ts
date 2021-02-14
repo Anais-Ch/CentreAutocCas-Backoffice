@@ -34,12 +34,25 @@ export class UserComponent implements OnInit {
 
   }
 
+  // var set to false to determine which btn delete was clicked
+  public btnUser: boolean = false;
+
+
+  //empty array to retrieve garage id
+  public idGarage: Array<number> = [];
+
+
+  //retrieve current id
+  public currentGarageId: number|null = null;
+
+
   constructor(
 
     private httpClient: HttpClient, //add httpclient protocole to component
     public activatedRoute: ActivatedRoute,     
     public router: Router,
-    private modalService: NgbModal, //for pop up   
+    private modalService: NgbModal, //for pop up  
+  
 
   ) { }
     
@@ -51,8 +64,18 @@ export class UserComponent implements OnInit {
         
       next: (currentUser: UserJsonld) => {
           
-        //console.log(user);
+        
           this.currentUser = currentUser;
+          
+          //retrieve garage id only  and push  oit in array idGarage
+          for (let garage of currentUser.garages){
+            
+            //parseINT >> turninto an int , substring >> get part of the string defined between 13, garage.length ( 13th character to teh end of the string)
+
+            this.idGarage.push(parseInt((garage.substring(13,(garage.length)))));
+
+          };
+          
         },
 
         error: (err: HttpErrorResponse) => {
@@ -66,27 +89,80 @@ export class UserComponent implements OnInit {
        
   }
 
+
+
   //Method DeleteUSer
     //retrieve user id in html call of the function
     public deleteUser(id: number): void {
-      this.httpClient.delete('https://hb-bc-dwwm-2020.deploy.this-serv.com/api/users/'+ id).subscribe({
-        next : () => {
 
-          //redirection on users list
-          this.router.navigate(['/users/users-list']);
-        },
-        error : (err: HttpErrorResponse) => { //error message
-          if (err.status === 404) {
-            this.violationList = err.error; //retrieve error form api message
-            alert (err.error['hydra:description']); 
-           
-          }
-          else { // inform iuser that an error has occured (need to dispaly a better message (error unexpected))
-            alert(err.status + '- An error as occured.');
-          }
-        },
-      });
+      if(this.btnUser === true) {
+        
+        this.httpClient.delete('https://hb-bc-dwwm-2020.deploy.this-serv.com/api/users/'+ id).subscribe({
+          next : () => {
+
+            //redirection on users list
+            this.router.navigate(['/users/users-list']);
+          },
+          
+          error : (err: HttpErrorResponse) => { //error message
+
+            if (err.status === 404) {
+
+              this.violationList = err.error; //retrieve error form api message
+              alert (err.error['hydra:description']); 
+             
+            }
+            else { // inform iuser that an error has occured (need to dispaly a better message (error unexpected))
+
+              alert(err.status + '- An error as occured.');
+            }
+          },
+        });
+        
+        }
+        else {
+          
+          
+          this.httpClient.delete('https://hb-bc-dwwm-2020.deploy.this-serv.com/api/garages/'+ id).subscribe({
+            next : () => {
+
+              //redirection on self
+              this.router.navigate(['/users/user', this.currentUser.id]);
+            },
+            
+            error : (err: HttpErrorResponse) => { //error message
+
+              if (err.status === 404) {
+
+                this.violationList = err.error; //retrieve error form api message
+                alert (err.error['hydra:description']); 
+              
+              }
+              else { // inform iuser that an error has occured (need to dispaly a better message (error unexpected))
+
+                alert(err.status + '- An error as occured.');
+              };
+            }
+          });
+        }
+    };
+
+
+    // set btn user to true
+    public setDeleteUser(): void {
+      
+      this.btnUser= true;
+
+    };
+
+    public setDeleteGarage(i:number):void {
+      this.btnUser =false;
+      this.currentGarageId = this.idGarage[i]; //get the current id for delete from current 
+      
     }
+
+    //track by for refresh in
+
 
    /////// FUNCTION FOR MODAL
    open(content: any) {

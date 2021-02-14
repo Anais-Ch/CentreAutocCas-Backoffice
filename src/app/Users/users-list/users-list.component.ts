@@ -1,11 +1,12 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit, Type} from '@angular/core';
-import { UserCollectionFilter } from 'src/app/forms/user-collection-filter';
+
 import { ConstraintViolationList } from 'src/app/models/constraint-violation-list';
 import { UserCollection } from 'src/app/models/user-collection';
 import { UserJsonld } from 'src/app/models/user-jsonld';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap'; //Modal
 import { Router } from '@angular/router';
+import { UserCollectionFilter } from 'src/app/forms/user-collection-filter';
 
 
 

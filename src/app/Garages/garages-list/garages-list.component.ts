@@ -58,13 +58,14 @@ export class GaragesListComponent implements OnInit {
 
       // Object.keys(this.filters) => ['email', 'lastName', 'bsrasrui']
       // Object.keys get an array of all attribute's name from a given object.
+      
       for (const key of Object.keys(this.filters)){ //filling filters with datat from page
         // access an object's attribute with that array syntax 
         if (key in this.filters) {
           const val= this.filters[key as keyof GarageCollectionFilter];
-
+          
           if(val !== null && val !== '' && val !== '/api/users/' ) {
-            url += '&' + key + '=';
+            url += '&' + key + '=' + val;
           }
         }
       }

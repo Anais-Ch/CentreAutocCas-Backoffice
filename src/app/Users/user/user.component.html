@@ -14,51 +14,65 @@
         </h1> 
     </div>
     <!--fin titre-->
+
     <!--ID-->
     <div class="d-flex flex-row">
         <h5 class="text-primary">ID</h5> <span class="ml-3 mr-3">{{currentUser.id}}</span>
     </div>
     <!-- fin ID-->
+
     <!--Last Name-->
     <div class="d-flex flex-row">
          <h5 class="text-primary">Nom</h5> <span class="ml-3 mr-3">{{currentUser.lastName}}</span>
     </div>
     <!-- fin LastName-->
+
     <!--First Name-->
     <div class="d-flex flex-row">
          <h5 class="text-primary">Prénom</h5> <span class="ml-3 mr-3">{{currentUser.firstName}}</span> 
     </div>
     <!-- fin FirstName-->
+
     <!--email-->
     <div class="d-flex flex-row">
         <h5 class="text-primary">Email</h5> <span class="ml-3 mr-3">{{currentUser.email}}</span>
     </div>
     <!-- fin email-->
+
     <!--Phone-->
     <div class="d-flex flex-row">
         <h5 class="text-primary">Phone</h5> <span class="ml-3 mr-3">{{currentUser.phone}}</span>
     </div>
     <!-- fin Phone-->
+
     <!--SIRET-->
     <div class="d-flex flex-row">
          <h5 class="text-primary">SIRET</h5> <span class="ml-3 mr-3" *ngIf="currentUser.siret !== null " >{{currentUser.siret}}</span> 
     </div>
     <!-- fin SIRET-->
+
     <!--Garages-->
     <div >
         <div >
             <h5 class="text-primary">Garages</h5>
         </div>
-        <div *ngFor="let garage of this.currentUser.garages; let i=index"  class="m-2 row d. flex justify-content-start">
+        <div *ngFor="let garage of this.currentUser.garages; let indexGarage=index"  class="m-2 row d. flex justify-content-start">
             <span class="col-2">
-                {{this.currentUser.garages[i]}}
+                {{this.currentUser.garages[indexGarage]}}
             </span>
-            <button class="btn btn-outline-secondary btn-sm ml-3">
-                Edit
+            <button class="btn btn-outline-secondary btn-sm ml-3" [routerLink]="['/garages/garages-administration',idGarage[indexGarage]]">
+              Edit
             </button>
-            <button class="btn btn-outline-danger btn-sm ml-3">
+
+            <button class="btn btn-outline-danger btn-sm ml-3" (click)="open(checkDelete); setDeleteGarage(indexGarage)">
                 Delete
             </button>
+
+
+            
+  
+
+
         </div> 
     </div>
     <!-- fin garages-->
@@ -73,7 +87,7 @@
         <!--END BTN EDIT-->
 
         <!-- BTN DELETE-->
-        <button type="submit" class="btn btn-danger mt-5 ml-5" (click)="open(checkDelete)">
+        <button type="submit" class="btn btn-danger mt-5 ml-5" (click)="setDeleteUser(); open(checkDelete)">
            Delete User
         </button>
 
@@ -81,29 +95,51 @@
   </div>
 
 
-  <!-- POP UP 1-->
-
   <!--START POP UP CHECK DELETE-->
   <ng-template #checkDelete let-modal>
 
     <div class="modal-header">
 
-      <h4 class="modal-title" id="modal-basic-title">Suppression</h4>
+      <h4 class="modal-title" id="modal-basic-title">
+        Suppression
+      </h4>
 
     </div>
 
     <div class="modal-body">
 
-      <p class="font-weight-bold">
-        Vous êtes sur le point de supprimer le compte de <span class="text-danger">{{this.currentUser.firstName}}  {{this.currentUser.lastName}}.</span>
-      </p>
-      <p>
-        Ceci entrainera la suppression de toutes les données liées au compte (utilisateur, garages et annonces).
-      </p>
+      <div *ngIf="this.btnUser === true">
+        <!--message for User deletion-->
+        <p class="font-weight-bold">
+          Vous êtes sur le point de supprimer le compte de <span class="text-danger">{{this.currentUser.firstName}}  {{this.currentUser.lastName}}.</span>
+        </p>
+        <p>
+          Ceci entrainera la suppression de toutes les données liées au compte (utilisateur, garages et annonces).
+        </p>
+
+      </div>
+      <!--END message for User deletion-->
+
+      <!--message for Garage deletion-->
+
+      <div *ngIf="this.btnUser !== true">
+
+        <p class="font-weight-bold">
+          Vous êtes sur le point de supprimer le garage <span class="text-danger">{{this.currentGarageId}}.</span>
+        </p>
+        <p>
+          Ceci entrainera la suppression de toutes les données liées au garage (garages et annonces).
+        </p>
+
+      </div>
+      <!--END message for Garage deletion-->
+
       <p>
         Etes vous sur de vouloir continuer? 
       </p>
+
       <br>
+
       <p class="text-danger font-weight-bold">
         Cette action est irréversible
       </p>
@@ -115,13 +151,29 @@
         Cancel
       </button>
 
-      <button type="button" class="btn btn-danger" (click)="deleteUser(currentUser.id); open(confirmDelete);modal.dismiss('Save Click')">Ok</button>
+      <!--BTN User deletion-->
 
+      <button *ngIf="this.btnUser === true" type="button" class="btn btn-danger" (click)="deleteUser(currentUser.id); open(confirmDelete);modal.dismiss('Save Click')">
+        Delete
+      </button>
+      <!--end BTN User deletion-->
+
+      <!--BTN User deletion-->
+
+      <button *ngIf="this.btnUser !== true && this.currentGarageId !== null" type="button" class="btn btn-danger" (click)="deleteUser(this.currentGarageId); open(confirmDelete);modal.dismiss('Save Click')">Ok</button>
+      <!--end BTN User deletion-->
     </div>
+
+
 
   </ng-template>
 
   <!--fin POP UP CHECK DELETE -->
+
+
+
+
+  <!-- POP UP 1-->
 
   <!--START POP UP CONFIRM DELETE-->
  <ng-template #confirmDelete let-modal>
@@ -135,9 +187,25 @@
     </div>
   
     <div class="modal-body">
-      <p>
+
+      <!--Message for USER Deletion complete-->
+      <div *ngIf="this.btnUser === true">
+
+        <p>
         Le compte utilisateur à bien été supprimé
-      </p>
+        </p>
+
+      </div>
+
+      <!--Message for GARAGE Deletion complete-->
+      <div *ngIf="this.btnUser !== true">
+
+        <p>
+        Le garage à bien été supprimé
+        </p>
+
+      </div>
+      
     </div>
   
     <div class="modal-footer">
@@ -153,3 +221,66 @@
   
   <!--fin POP UP-->
   
+
+
+
+
+  <!--START POP UP CHECK DELETE-->
+  <ng-template #checkDelete let-modal>
+
+    <div class="modal-header">
+
+      <h4 class="modal-title" id="modal-basic-title">
+        Suppression
+      </h4>
+
+    </div>
+
+    <div class="modal-body">
+
+      <div *ngIf="this.btnUser === true">
+        <!--message for User deletion-->
+        <p class="font-weight-bold">
+          Vous êtes sur le point de supprimer le compte de <span class="text-danger">{{this.currentUser.firstName}}  {{this.currentUser.lastName}}.</span>
+        </p>
+        <p>
+          Ceci entrainera la suppression de toutes les données liées au compte (utilisateur, garages et annonces).
+        </p>
+
+      </div>
+      <!--END message for User deletion-->
+
+    
+
+      <p>
+        Etes vous sur de vouloir continuer? 
+      </p>
+
+      <br>
+
+      <p class="text-danger font-weight-bold">
+        Cette action est irréversible
+      </p>
+      
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        Cancel
+      </button>
+
+      <!--BTN User deletion-->
+
+      <button *ngIf="this.btnUser === true" type="button" class="btn btn-danger" (click)="deleteUser(currentUser.id); open(confirmDelete);modal.dismiss('Save Click')">
+        Delete
+      </button>
+       <!--end BTN User deletion-->
+
+      
+    </div>
+
+
+
+  </ng-template>
+
+  <!--fin POP UP CHECK DELETE -->

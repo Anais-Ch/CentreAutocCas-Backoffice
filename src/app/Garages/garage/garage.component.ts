@@ -23,7 +23,7 @@ export class GarageComponent implements OnInit {
     '@context':  '', 
     '@type': '',
     id:  0,
-    name: undefined,
+    name: '',
     street: undefined,
     streetComplement: undefined,
     postalCode: undefined, 
