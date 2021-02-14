@@ -36,10 +36,81 @@ export class GaragesAdministrationComponent implements OnInit {
           this.garage = garage;
         },
 
-        error: (err: HttpErrorResponse) => {
+        error : (err: HttpErrorResponse) => { //error message
+          if (err.status === 404) {
 
-          ///need to handle error better than this
-          alert(err.status + ' - ' + err.statusText);
+            alert(err.status + ' - ' + err.statusText)
+            this.violationList = err.error; //retrieve error form api message
+            //alert (violationList ['hydra:description']); // obosolete// print api message
+          }
+          else if (err.status === 301) { //  ( unexpected error)
+  
+            alert(err.status + '- Page déplacée de manière permanente');
+          }
+          else if ((((err.status).toString()).substring(0)) === '3'){
+  
+            alert(err.status + '-Redirection')
+          }
+          else if (err.status === 400) {
+  
+            alert(err.status + '- Mauvaise requète, veuillez entrer des valeurs valides');
+  
+          }
+          else if (err.status === 403){
+  
+            alert(err.status + '-Authorisation insuffisante pour la requète courante. -Accés interdit');
+  
+          }
+          else if (err.status === 406) {
+  
+            alert(err.status + '-Requète non acceptable, format non pris en compte');
+  
+          }
+          else if (err.status === 410) {
+  
+              alert(err.status + '-La ressource n\' est plus disponible et aucune redirection n\'est connue');
+          }
+          else if (err.status === 444) {
+  
+            alert(err.status + '-Absence de réponse serveur');
+          }
+          else if (err.status === 456) {
+  
+            alert(err.status + '-Erreur irrécupérable');
+          }
+          else if ((((err.status).toString()).substring(0)) === '4'){
+  
+            alert(err.status + '-Erreur Client')
+  
+          }
+          else if (err.status === 500) {
+  
+            alert(err.status + 'Erreur interne du serveur');
+          }
+  
+          else if (err.status === 502) {
+            
+            alert(err.status + '- mauvaise passerelle');
+          }
+  
+          else if (err.status === 503) {
+  
+            alert(err.status + '- Service Indisponible- Le serveur est en cours de maintenance veuillez réessayer plsu tard');
+  
+          }
+  
+          else if (err.status === 504) {
+  
+            alert(err.status + '-Le portail a éxpiré');
+          }
+  
+          else if (err.status === 508){
+  
+            alert(err.status + '- Limite de ressource atteinte');
+          }
+          else {
+            alert(err.status +'- Erreur Serveur')
+          }
         },
       });
     });
@@ -60,15 +131,80 @@ export class GaragesAdministrationComponent implements OnInit {
        this.router.navigate(['/garages/garages-list']);
       },
       
-      error: (err: HttpErrorResponse) => {
+      error : (err: HttpErrorResponse) => { //error message
+        if (err.status === 400) {
 
-        if(err.status === 422) {
+          alert(err.status + ' - ' + err.statusText)
+          this.violationList = err.error; //retrieve error form api message
+          //alert (violationList ['hydra:description']); // obosolete// print api message
+        }
+        else if (err.status === 301) { //  ( unexpected error)
 
-          this.violationList = err.error;
+          alert(err.status + '- Page déplacée de manière permanente');
+        }
+        else if ((((err.status).toString()).substring(0)) === '3'){
+
+          alert(err.status + '-Redirection')
+        }
+        else if (err.status === 404) {
+
+          alert(err.status + '- Page non trouvée');
+
+        }
+        else if (err.status === 403){
+
+          alert(err.status + '-Authorisation insuffisante pour la requète courante. -Accés interdit');
+
+        }
+        else if (err.status === 406) {
+
+          alert(err.status + '-Requète non acceptable, format non pris en compte');
+
+        }
+        else if (err.status === 410) {
+
+            alert(err.status + '-La ressource n\' est plus disponible et aucune redirection n\'est connue');
+        }
+        else if (err.status === 444) {
+
+          alert(err.status + '-Absence de réponse serveur');
+        }
+        else if (err.status === 456) {
+
+          alert(err.status + '-Erreur irrécupérable');
+        }
+        else if ((((err.status).toString()).substring(0)) === '4'){
+
+          alert(err.status + '-Erreur Client')
+
+        }
+        else if (err.status === 500) {
+
+          alert(err.status + 'Erreur interne du serveur');
+        }
+
+        else if (err.status === 502) {
+          
+          alert(err.status + '- mauvaise passerelle');
+        }
+
+        else if (err.status === 503) {
+
+          alert(err.status + '- Service Indisponible- Le serveur est en cours de maintenance veuillez réessayer plsu tard');
+
+        }
+
+        else if (err.status === 504) {
+
+          alert(err.status + '-Le portail a éxpiré');
+        }
+
+        else if (err.status === 508){
+
+          alert(err.status + '- Limite de ressource atteinte');
         }
         else {
-
-          alert(err.status + ' - An error occurred');
+          alert(err.status +'- Erreur Serveur')
         }
       },
     });

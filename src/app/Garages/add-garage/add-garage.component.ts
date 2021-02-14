@@ -46,9 +46,11 @@ export class AddGarageComponent implements OnInit {
       },
       
       error : (err: HttpErrorResponse) => { //error message
-        if (err.status === 422) {
+        if (err.status === 400) {
+          alert(err.status + ' - ' + err.statusText)
           this.violationList = err.error; //retrieve error form api message
           //alert (violationList ['hydra:description']); // obosolete// print api message
+        
         }
         else if (err.status === 301) { //  ( unexpected error)
 
@@ -61,6 +63,11 @@ export class AddGarageComponent implements OnInit {
         else if (err.status === 400) {
 
           alert(err.status + '- Mauvaise requète, veuillez entrer des valeurs valides');
+
+        }
+        else if (err.status === 404) {
+
+          alert(err.status + '- Page non trouvée');
 
         }
         else if (err.status === 403){
@@ -81,7 +88,7 @@ export class AddGarageComponent implements OnInit {
 
           alert(err.status + '-Absence de réponse serveur');
         }
-        else if (err.status === 444) {
+        else if (err.status === 456) {
 
           alert(err.status + '-Erreur irrécupérable');
         }

@@ -40,7 +40,7 @@ export class AdFormComponent implements OnInit {
 
     if (this.violationList !== null) {
       
-      for (const err of this.violationList.violations) { //get array violaton from constraintViolationlist interface
+      for (const err of this.violationList.violations) { //get array violaton from constraintViolationlist interface for form fields
         
         if(err.propertyPath === fieldName) { //check if API message is one of the API KNown error
           
