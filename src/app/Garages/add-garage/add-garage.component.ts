@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ConstraintViolationList } from 'src/app/models/constraint-violation-list';
 import { Garage } from 'src/app/models/garage';
 import { GarageResourceJsonld } from 'src/app/models/garage-ressources';
@@ -14,6 +14,7 @@ export class AddGarageComponent implements OnInit {
 
   constructor(
     private httpClient: HttpClient, //http protocole
+    private activatedRoute: ActivatedRoute, //activated route
     private router: Router, // add router service
 
   ) { }
@@ -31,6 +32,15 @@ export class AddGarageComponent implements OnInit {
   };
 
   ngOnInit(): void {
+
+    this.activatedRoute.params.subscribe((params) =>
+    {
+        if (params.id !=='0') {
+
+          this.garage.owner='/api/users/'+params.id ;       
+        }
+    });
+
   }
 
   //Outside ngOnInit(): void

@@ -193,11 +193,7 @@ export class UserFormComponent implements OnInit {
 
     
 
-    public editUser():void {
-
-      this.editBtn = true;
-    }
-
+  
 
 
 

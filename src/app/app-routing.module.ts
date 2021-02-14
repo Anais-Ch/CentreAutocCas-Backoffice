@@ -50,7 +50,7 @@ const routes: Routes = [
     //link between used and edit user with url path :id (add variable int the path)
   {path:'garages/garage/:id', component: GarageComponent},
 
-  {path: 'garages/add-garage', component: AddGarageComponent},
+  {path: 'garages/add-garage/:id', component: AddGarageComponent},
 
 
   //ADS related pages path

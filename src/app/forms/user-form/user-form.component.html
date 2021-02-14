@@ -116,7 +116,7 @@
             </form>
 
           </div>
-          
+
           <!--START POP UP-->
           <ng-template #checkDelete let-modal>
 
@@ -167,13 +167,13 @@
         <small *ngFor="let err of retrieveErrors('garages')" class="form-text text-danger">{{err}}</small>
         
         <!--BTN NEW GARAGE-->
-        <button type="submit" class="btn btn-outline-success  ml-3" routerLink="/garages/add-garage">New garage</button>
+        <button type="submit" class="btn btn-outline-success  ml-3" [routerLink]="['/garages/add-garage',0]" >New garage</button>
 
       </div>
       <!--input GARAGES end-->
     
       <!--BTN create-->
-      <button type="submit" class="btn btn-success" (click)="editUser()">
+      <button type="submit" class="btn btn-success">
         
         <span *ngIf="createUserUrl === true">
           Create the user
