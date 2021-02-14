@@ -25,13 +25,16 @@ export class UserFormComponent implements OnInit {
 
   closeResult: string | undefined; //modal
 
-
+  @Input()
+  public currentUserId = 0;
  
   @Input()
   public idGarage: Array<number> = [];
 
   @Input()
   public user: User|null= null; //variable for ngIf on form
+
+   
 
   @Input()
   public violationList: ConstraintViolationList|null = null;
@@ -77,6 +80,7 @@ export class UserFormComponent implements OnInit {
         this.createUserUrl =true;  
     }
 
+   
   }
 
 

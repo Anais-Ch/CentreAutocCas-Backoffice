@@ -167,7 +167,7 @@
         <small *ngFor="let err of retrieveErrors('garages')" class="form-text text-danger">{{err}}</small>
         
         <!--BTN NEW GARAGE-->
-        <button type="submit" class="btn btn-outline-success  ml-3" [routerLink]="['/garages/add-garage',0]" >New garage</button>
+        <button type="submit" class="btn btn-outline-success  ml-3" [routerLink]="['/garages/add-garage',currentUserId]" >New garage</button>
 
       </div>
       <!--input GARAGES end-->

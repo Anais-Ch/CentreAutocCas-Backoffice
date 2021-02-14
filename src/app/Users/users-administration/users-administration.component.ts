@@ -21,6 +21,9 @@ export class UsersAdministrationComponent implements OnInit {
   public user: UserJsonld|null = null; //get user object
 
   public violationList: ConstraintViolationList|null = null; //get constraint violation list object
+   
+  //set objet id
+   public currentUserId: number = 0;
 
 
   /////// 
@@ -42,7 +45,7 @@ export class UsersAdministrationComponent implements OnInit {
 
   ngOnInit(): void {
 
-
+      
     /// COMPARE CURENT URL TO ADD-USER URL
     if (this.CurrentUrl ===  this.addUserUrl){
 
@@ -53,8 +56,10 @@ export class UsersAdministrationComponent implements OnInit {
     //retrieve params from URL (defined in app-routing.module.ts).
     this.activatedRoute.params.subscribe((params) => {
       //params.Yourvar
+      this.currentUserId = params.id;
+
       this.httpClient.get<UserJsonld>('https://hb-bc-dwwm-2020.deploy.this-serv.com/api/users/' + params.id).subscribe({
-        
+       
         next: (user: UserJsonld) => {
         this.user = user;
         
