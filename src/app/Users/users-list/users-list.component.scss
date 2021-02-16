@@ -1,7 +1,9 @@
-body{
-    background: #edf1f5;
-    margin-top:20px;
-    font: 'Nunito';
+.bg-light {
+    background-color: none!important;
+}
+
+.card[_ngcontent-uog-c116] {
+    background-color: transparent!important;
 }
 .card {
     position: relative;
@@ -9,10 +11,10 @@ body{
     flex-direction: column;
     min-width: 0;
     word-wrap: break-word;
-    background-color: #fff;
     background-clip: border-box;
     border: 0 solid transparent;
     border-radius: 0;
+    background-color: transparent!important;
 }
 h5{
     font-family: 'Nunito', sans-serif;
