@@ -1,6 +1,74 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~bootstrap/dist/css/bootstrap.min.css';
-//Font Nunito
-@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap');
+
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
+
+//Font Nunito
+@font-face {
+    font-family: Nunito-Black;
+    src: url(/assets/fonts/Nunito/Nuito-Black.ttf) format("truetype");
+  }
+
+@font-face {
+    font-family: Nunito_BlackItalic;
+    src: url(/assets/fonts/Nunito/Nuito-BlackItalic.ttf) format("truetype");
+}
+
+@font-face {
+    font-family: Nunito-Bold;
+    src: url(/assets/fonts/Nunito/Nuito-Bold.ttf) format("truetype");
+}
+
+@font-face {
+    font-family: Nunito-BoldItalic;
+    src: url(/assets/fonts/Nunito/Nuito-BoldItalic.ttf) format("truetype");
+}
+
+@font-face {
+    font-family: Nunito-ExtraBold;
+    src: url(/assets/fonts/Nunito/Nuito-ExtraBold.ttf) format("truetype");
+}
+
+@font-face {
+    font-family: Nunito-ExtraLight;
+    src: url(/assets/fonts/Nunito/Nunito-BExtraLight.ttf) format("truetype");
+}
+
+@font-face {
+    font-family: Nunito-ExtraLightItalic;
+    src: url(/assets/fonts/Nunito/Nunito-ExtraLighItalic.ttf) format("truetype");
+}
+
+@font-face {
+    font-family: Nunito-Italic;
+    src: url(/assets/fonts/Nunito/Nunito-Italic.ttf) format("truetype");
+}
+
+@font-face {
+    font-family: Nunito-Light;
+    src: url(/assets/fonts/Nunito/Nunito-Light.ttf) format("truetype");
+}
+
+@font-face {
+    font-family: Nunito-LightItalic;
+    src: url(/assets/fonts/Nunito/Nunito-LigthItalic.ttf) format("truetype");
+}
+
+@font-face {
+    font-family: Nunito-Regular;
+    src: url(/assets/fonts/Nunito/Nunito-Regular.ttf) format("truetype");
+}
+
+@font-face {
+    font-family: Nunito-SemiBold;
+    src: url(/assets/fonts/Nunito/Nunito-SemiBold.ttf) format("truetype");
+}
+
+@font-face {
+    font-family: Nunito-SemiBoldItalic;
+    src: url(/assets/fonts/Nunito/Nunito-SemiBoldItalic.ttf) format("truetype");
+}
+
+
+
